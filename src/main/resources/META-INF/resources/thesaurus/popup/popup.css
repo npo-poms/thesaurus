@@ -1,0 +1,63 @@
+
+body.waiting  * {
+    cursor: wait;
+}
+
+.example-body {
+    padding: 24px 24px 48px;
+    background-color: #f2f2f2;
+}
+
+.example-body .poms-typeahead .dropdown-menu {
+    overflow-y: auto;
+    max-height: 70vh;
+    min-height: 400px;
+}
+
+
+.gtaa {
+    width: 24px;
+    height: 20px;
+    float: right;
+    text-indent: -9999px;
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    fill: gray;
+    background-image: url("../../meeuw/circle?color=%23d1d1d1")
+
+}
+
+.gtaa-type-person {
+    background-image: url(../../resources/icons/person-unapproved.svg)
+}
+
+span.gtaa-status-approved {
+    background-image: url("../../meeuw/circle?color=%23ed6d1c");
+}
+
+span.gtaa-status-create {
+    background-image: url(../../meeuw/circle?color=white);
+}
+a.status-create {
+    background-color: #ED6D1C;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+span.gtaa-status-approved.gtaa-type-person {
+    background-image: url(../../resources/icons/person-approved.svg)
+}
+#spinner {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 64px;
+}
+
+span.id {
+    display: none;
+}
+a.highlight {
+    background-color: #bbffbb;
+}

@@ -1,0 +1,47 @@
+<div class="gtaa-rows-{{concept.objectType}}">
+
+  <div class="row">
+    <div class="col-4 field">
+      <label label-for="givenName">Voornaam:</label>
+      <input id="givenName"
+             ng-disabled="true"
+             type="text" ng-model="concept.givenName"/>
+    </div>
+
+    <div class="col-4 field">
+      <label label-for="familyName">Achternaam: </label>
+      <input id="familyName"
+             ng-disabled="true"
+             type="text" ng-model="concept.familyName"/>
+      <br/>
+      <label label-for="type">As: </label>
+      <input id="type"
+             ng-disabled="true"
+             type="text" ng-model="concept.$scheme.label"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8 field">
+      <label label-for="scopeNote">Opmerking: </label>
+      <div ng-repeat="scopeNote in concept.scopeNotes">
+        <input
+                id="scopeNote"
+                type="text"
+                ng-disabled="true"
+                value="{{scopeNote}}" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-8 field">
+      <label label-for="role">Role: </label>
+      <select id="role"
+              ng-options="item as item.label for item in personRoles track by item.name"
+              ng-model="concept.$role"></select>
+    </div>
+  </div>
+</div>
+

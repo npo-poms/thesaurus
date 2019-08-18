@@ -1,0 +1,25 @@
+<web-fragment
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
+              id="svg-servlets" version="3.0">
+
+  <name>poms_thesaurus</name>
+
+  <servlet>
+    <servlet-name>example-callback</servlet-name>
+    <jsp-file>/thesaurus/callback/index.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>popup.js</servlet-name>
+    <jsp-file>/thesaurus/popup.js/index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>example-callback</servlet-name>
+    <url-pattern>/thesaurus/callback</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>popup.js</servlet-name>
+    <url-pattern>/thesaurus/popup.js</url-pattern>
+  </servlet-mapping>
+</web-fragment>

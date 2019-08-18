@@ -1,0 +1,21 @@
+body {
+    padding: 20px;
+    overflow: auto;
+}
+a {
+    text-decoration: underline;
+}
+
+.row {
+    padding-top: 1em;
+    display: block;
+}
+
+#json {
+    height: 100ex;
+}
+
+input[type=checkbox] {
+    display: inline;
+}
+

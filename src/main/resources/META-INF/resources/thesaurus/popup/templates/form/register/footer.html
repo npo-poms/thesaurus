@@ -1,0 +1,22 @@
+<div class="required-feedback footer-message">
+    <span class="inline-error" ng-if="error.message">
+        {{error.message}}
+    </span>
+    <span class="ok" ng-if="! error.message && validConcept(concept)">
+        geen fouten
+    </span>
+    <span ng-if="!validConcept(concept)">
+        <span class="required-feedback-message">
+            Nog in te vullen:
+        </span>
+        <span ng-repeat="(key, value) in emptyRequiredFields" class="required-field-nocomma">
+            {{value}}{{ $last ? '' : ', '}}
+        </span>
+    </span>
+</div>
+<button  tabindex="0" class="btn-rect"
+         id="register"
+         ng-click="register(concept)" ng-disabled="!validConcept(concept)">Registreer</button>
+<button  tabindex="0" class="btn-rect btn-rect-cancel"
+         id="cancel"
+         ng-click="cancelRegistration()" ng-disabled="waiting">Annuleer</button>

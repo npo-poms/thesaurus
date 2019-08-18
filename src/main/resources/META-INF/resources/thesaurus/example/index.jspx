@@ -1,0 +1,125 @@
+<jsp:root
+  xmlns:jsp="http://java.sun.com/JSP/Page"
+  version="2.0"
+  xmlns:c="http://java.sun.com/jsp/jstl/core" >
+  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+  <jsp:output
+      doctype-root-element="HTML"
+              doctype-system="about:legacy-compat" />
+  <jsp:directive.page import="java.util.Arrays"/>
+  <jsp:directive.page import="nl.vpro.domain.gtaa.Scheme"/>
+  <jsp:directive.page import="nl.vpro.thesaurus.Utils"/>
+  <jsp:directive.page import="nl.vpro.util.PropertiesUtil"/>
+  <jsp:directive.page import="java.time.Instant"/>
+  <jsp:directive.page import="java.time.Duration"/>
+  <jsp:scriptlet>
+    //We didnt set up MVC or so.
+    // We only need very simply access to properties, and to jws-calculation.
+    PropertiesUtil propertiesUtil = ((PropertiesUtil) org.springframework.web.context.ContextLoader.getCurrentWebApplicationContext().getBean("properties"));
+    request.setAttribute("properties", propertiesUtil.getMap());
+    Instant expiration = Instant.now().plus(Duration.ofHours(1));
+    request.setAttribute("jwtExpiration", expiration.toEpochMilli());
+    request.setAttribute("jwt", Utils.jws("Example", expiration));
+    request.setAttribute("gtaaSchemes", Arrays.asList(Scheme.values()));
+  </jsp:scriptlet>
+  <html  lang="nl">
+  <head>
+    <title>POMS GTAA</title>
+    <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript"><jsp:text></jsp:text></script>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js" type="application/javascript"><jsp:text></jsp:text></script>
+    <script src="index.js" type="application/javascript"><jsp:text></jsp:text></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
+    <link rel="stylesheet" href="index.css"/>
+    <meta name="jwt"  content="${requestScope.jwt}" />
+    <meta name="jwtExpiraton"  content="${requestScope.jwtExpiration}" />
+    <meta name="contextPath"  content="${pageContext.request.contextPath}" />
+  </head>
+  <body>
+  <div class="poms-form form-fields">
+    <div class="form-fields">
+
+      <div class="col-8"> <!-- ridiculous amounts of div's -->
+
+        <div class="row">
+          <h1>GTAA - Voorbeeld</h1>
+          <p>
+            <jsp:text>Binnen de GTAA thesaurus is het mogelijk om op verschillende assen naar naar termen te zoeken. De mogelijke assen zijn te vinden op </jsp:text>
+            <a href="http://openskos.org/api/collections/beg:gtaa.html">gtaa conceptSchemes</a>
+            <jsp:text>lijst.</jsp:text>
+          </p>
+          <p>Vul het volgend formulier (alle velden zijn optioneel) en druk op 'Open'.</p>
+        </div>
+        <form action="">
+
+
+          <div class="row">
+            <div class="col-6">
+              <select id="schemes" multiple="multiple" style="max-height:400px; height: 120px;">
+                <c:forEach var="gtaaScheme" items="${gtaaSchemes}">
+                  <option value="${gtaaScheme.name()}">
+                    <c:out value="${gtaaScheme.pluralDisplayName.get()}" />
+                  </option>
+                </c:forEach>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="id">Callback:</label>
+              <input type="checkbox" id="usecallbackurl" />
+              <input type="text"
+                     id="callbackurl"
+                     value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback/" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="id">Readonly:</label>
+              <input type="checkbox" id="readonly" />
+            </div>
+          </div>
+          <div class="fields row">
+            <div id="person" class="hide row person">
+              <div class="col-6">
+                <label for="givenName">Voornaam:</label>
+                <input type="text" id="givenName"/>
+              </div>
+              <div class="col-6">
+              <label for="familyName">Familienaam:</label>
+                <input type="text" id="familyName"/>
+              </div>
+            </div>
+
+            <div id="concept" class="row concept">
+              <div class="col-6">
+                <label for="name">Naam:</label>
+                <input type="text" id="name"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <label for="id">GTAA ID ( full GTAA uri ):</label>
+                <input type="text" id="id"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <button id="open" class="btn-rect">Open</button>
+            <button id="reset" class="btn-rect" type="reset">Clear</button>
+          </div>
+          <div id="result" class="row">
+            <label for="json">
+              <span class="postmessage">Resultaat (postMessage):</span>
+              <span style="display: none" class="httppost">Response van de callback:</span>
+            </label>
+            <textarea cols="100" rows="160" id="json"><jsp:text></jsp:text></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </body>
+  </html>
+</jsp:root>

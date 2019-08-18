@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>IE PostMessage</title>
+    <script>
+
+        var popup;
+        var query;
+
+        window.postIEMessage = function (value, destination) {
+            document.getElementById('test').innerHTML = value;
+            window.parent.postMessage(value, '*');
+            popup.close();
+        };
+
+        query = window.location.href.split('?')[1];
+
+        popup = window.open('.?'+query, '', 'width=1024,height=768,resizable=yes');
+    </script>
+</head>
+<body>
+Internet Explorer postMessage
+<p id="test"></p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<h2>Registreer een nieuw object bij B&amp;G</h2>
+<div class="row">
+  <div class="col-4 field">
+    <div ng-if="concept.$scheme.objectType != 'person'">
+      <label label-for="name">Naam:</label>
+      <input id="name"
+             ng-model="concept.name" type="text"/>
+      <br/>
+    </div>
+    <div ng-if="concept.$scheme.objectType == 'person'">
+      <label label-for="givenName">Voornaam:</label>
+      <input
+              id="givenName" ng-model="concept.givenName"
+              type="text"/>
+      <br/>
+      <label label-for="familyName">Achernaam: </label>
+      <input
+              id="familyName" ng-model="concept.familyName"
+              type="text"/>
+      <br />
+    </div>
+    <label label-for="scheme">As:</label>
+    <select
+            id="scheme"
+            ng-init="concept.$scheme = schemes[0]"
+            ng-model="concept.$scheme"
+            ng-options="scheme as scheme.label for scheme in schemes track by scheme.objectType"
+            ng-required="true"
+            placeholder="Kies een as"></select>
+
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-8 field">
+    <label label-for="scopeNote">Opmerking: </label>
+    <input
+            id="scopeNote"
+            ng-model="concept.scopeNotes[0]"
+            type="text" />
+  </div>
+</div>
+

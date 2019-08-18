@@ -1,0 +1,16 @@
+
+<a tabindex="-1" class="status-{{match.model.status}}" ng-class="match.model.$highlight ? 'highlight' : ''" id="{{match.model.id}}">
+  <span title='{{match.model.status}}'
+        class='modal-person-gtaa gtaa media-person-gtaa-{{match.model.status}} gtaa-status-{{match.model.status}} gtaa-type-{{match.model.objectType}}'></span>
+  <span ng-if="!match.model.$createMessage" ng-bind-html="match.model.name || '' | uibTypeaheadHighlight:query"></span>
+  <span ng-if="match.model.$createMessage" ng-bind-html="match.model.$createMessage"></span>
+  <span ng-if="match.model.$scheme" ng-bind-html="'[' + match.model.$scheme.label + ']' || ''" ></span>
+  <span ng-if="match.model.scopeNotes.length > 0">
+    <br/>
+    <span ng-repeat='scopeNote in match.model.scopeNotes'>
+      <span ng-bind-html="scopeNote"></span>
+    </span>
+  </span>
+  <span class="id">{{match.model.id}}</span>
+
+</a>
