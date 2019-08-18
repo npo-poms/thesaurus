@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>example-callback</servlet-name>
-    <jsp-file>/thesaurus/callback/index.jsp</jsp-file>
+    <jsp-file>/thesaurus/example/callback/index.jsp</jsp-file>
   </servlet>
   <servlet>
     <servlet-name>popup.js</servlet-name>
@@ -16,7 +16,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>example-callback</servlet-name>
-    <url-pattern>/thesaurus/callback</url-pattern>
+    <url-pattern>/thesaurus/example/callback</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>popup.js</servlet-name>

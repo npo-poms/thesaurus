@@ -69,7 +69,7 @@
               <input type="checkbox" id="usecallbackurl" />
               <input type="text"
                      id="callbackurl"
-                     value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback/" />
+                     value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback" />
             </div>
           </div>
           <div class="row">
@@ -120,6 +120,7 @@
       </div>
     </div>
   </div>
+  <p>De implementatie van deze pagina vind je <a href="https://github.com/npo-poms/thesaurus/tree/master/src/main/resources/META-INF/resources/thesaurus/example">hier</a></p>
   </body>
   </html>
 </jsp:root>
