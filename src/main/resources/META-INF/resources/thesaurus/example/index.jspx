@@ -38,7 +38,7 @@
   <div class="poms-form form-fields">
     <div class="form-fields">
 
-      <div class="col-8"> <!-- ridiculous amounts of div's -->
+      <div class="col-8"> <!-- ridiculous amounts of div's, this is because we borrow the CSS of the POMS GUI for consistent styling-->
 
         <div class="row">
           <h1>GTAA - Voorbeeld</h1>
@@ -94,6 +94,13 @@
               <div class="col-6">
                 <label for="name">Naam:</label>
                 <input type="text" id="name"/>
+              </div>
+            </div>
+
+            <div class="row role">
+              <div class="col-6">
+                <label for="name">Rol:</label>
+                <input type="text" id="role"/>
               </div>
             </div>
 

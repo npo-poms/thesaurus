@@ -1,15 +1,19 @@
  $(document).ready(function () {
-     var concept =   $("#concept");
-     var person =   $("#person");
+     var concept = $("#concept");
+     var person  = $("#person");
+     var role    = $("#role");
      var postmessage = $(".postmessage");
      var httppost    = $(".httppost");
      var callback = $("#callbackurl");
 
      function showPerson() {
-         concept.hide(); person.show();
+         concept.hide();
+         person.show();
      }
      function showConcept() {
-         concept.show(); person.hide();
+         concept.show();
+         person.hide();
+
      }
      $(".hide").hide();
      callback.hide();
@@ -41,7 +45,8 @@
              name: $('#name').val(),
              givenName: $('#givenName').val(),
              familyName: $('#familyName').val(),
-             id: $('#id').val()
+             id: $('#id').val(),
+             role: role.val()
          };
           var schemes = $('#schemes').val();
           if (schemes.length > 0) {
@@ -75,11 +80,15 @@
                          }
                          $('#id').val(concept.id);
                          $('#schemes').val(concept.objectType);
+                         if (data.role) {
+                             console.log(data.role);
+                             role.val(data.role.name);
+                         }
                      } else {
                          showConcept();
-                         $('#id').val('');
-                         $('#schemes').val('');
                      }
+
+
                  }
                  $('#json').val(JSON.stringify(JSON.parse(JSON.stringify(data)), null, 2));
 

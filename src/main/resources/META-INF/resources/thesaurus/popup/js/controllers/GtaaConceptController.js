@@ -138,12 +138,6 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
                     concept.$role = {
                         "name": "UNDEFINED"
                     };
-                    for (r in $scope.geoRoles) {
-                        if (r.name in $location.search()) {
-
-                        }
-                    }
-
                     break;
                 case "geographicname":
                     concept.$role = {
@@ -151,12 +145,16 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
                     };
                     break;
             }
+
             try {
                 concept.$highlight = concept.id === $location.search().id;
                 concept.$scheme = $scope.gtaaSchemes[concept.objectType];
                 concept.$schemeLabel = $scope.gtaaSchemes[concept.objectType].label;
-
-
+                if (concept.$role) {
+                    if ($location.search().role) {
+                        concept.$role.name = $location.search().role;
+                    }
+                }
             } catch (e) {
                 log(e, concept);
             }
