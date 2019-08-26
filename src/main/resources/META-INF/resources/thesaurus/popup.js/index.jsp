@@ -36,12 +36,12 @@ var gtaa = {
                         if (value !== '') {
                             if (Array.isArray(value)){
                                 for (i in value) {
-                                    if (value[i]) {
+                                    if (value[i] !== null && value[i] !== undefined) {
                                         query += (query.length ? '&' : '?') + key + '=' + value[i];
                                     }
                                 }
                             } else {
-                                if (value) {
+                                if (value !== null && value !== undefined) {
                                     query += (query.length ? '&' : '?') + key + '=' + value;
                                 }
                             }
