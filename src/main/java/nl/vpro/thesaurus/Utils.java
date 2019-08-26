@@ -43,6 +43,12 @@ public class Utils implements ApplicationContextAware {
         Utils.applicationContext = applicationContext;
     }
 
+    /**
+     * Given the subject, calculates a JWT-string for the currenly logged in user.
+     * @param subject
+     * @param expiration
+     * @return The JWT-string, or an empty string if there is no currently logged in user.
+     */
     public static String jws(@NonNull String subject, @NonNull Instant expiration) {
 
         PropertiesUtil properties = applicationContext.getBeanProvider(PropertiesUtil.class).getIfAvailable();
@@ -57,6 +63,12 @@ public class Utils implements ApplicationContextAware {
         }
     }
 
+    /**
+     * Represents an enum as a json array of objects, where each each map entry at least contains a 'name' (the name of the enum) key and a 'label' (defaults to its {@link Object#toString()} value) but it
+     * can contain more values depending on which enum it actually is (it e.g. may implement {@link Displayable}, and may also have
+     * a 'plurallabel')).
+     * @param enumClass The class of the enum to represent all possible values of.
+     */
 
     public static String buildJsonArray(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
         List<Map<String, String>> result = new ArrayList<>();
@@ -65,6 +77,12 @@ public class Utils implements ApplicationContextAware {
         }
         return MAPPER.writeValueAsString(result);
     }
+
+     /**
+      * Represents an enum as a json object of objects, the keys are the enum's '{@link Enum#name()}} and the values are the same values as in {@link #buildJsonObject(Class)}
+     * @param enumClass The class of the enum to represent all possible values of.
+     */
+
     public static String buildJsonObject(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
         Map<String, Map<String, String>> result = new HashMap<>();
         for (Enum type : enumClass.getEnumConstants()) {
@@ -106,7 +124,6 @@ public class Utils implements ApplicationContextAware {
             });
             item.put("label", displayable.getDisplayName());
         } else {
-
             item.put("label", type.toString());
         }
 

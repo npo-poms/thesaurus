@@ -76,6 +76,12 @@
             <div class="col-6">
               <label for="id">Readonly:</label>
               <input type="checkbox" id="readonly" />
+              <span id="loginlink">
+                Je bent niet ingelogd. De thesaurus is dus altijd readyonly.
+                <a id="loginlink"
+                 href="${pageContext.request.contextPath}/thesaurus/example/secure">login nu</a>
+
+              </span>
             </div>
           </div>
           <div class="fields row">

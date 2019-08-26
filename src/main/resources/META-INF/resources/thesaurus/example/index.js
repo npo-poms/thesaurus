@@ -9,9 +9,13 @@
 
      var jwt =  $("meta[name=jwt]").attr("content");
      var mustBeReadOnly = jwt === '';
+     console.log(mustBeReadOnly);
      if (mustBeReadOnly) {
          readonly.prop("checked", true);
-         readonly.prop("readonly", true);
+         readonly.prop("readonly", "readonly");
+         readonly.prop("disabled", "disabled");
+     } else {
+         $("#loginlink").hide();
      }
 
      function showPerson() {
@@ -62,11 +66,10 @@
          }
 
 
-         var readonly = readonly[0].checked;
-         if (! readonly) {
+         var ro = readonly[0].checked;
+         if (! ro) {
              options.jwt = jwt;
              options.jwtExpiraton = $("meta[name=jwtExpiration]").attr("content");
-
          }
          if ($("#usecallbackurl")[0].checked) {
              options.callbackService = $("#callbackurl").val();
