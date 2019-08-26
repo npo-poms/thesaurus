@@ -36,10 +36,14 @@ var gtaa = {
                         if (value !== '') {
                             if (Array.isArray(value)){
                                 for (i in value) {
-                                    query += (query.length ? '&' : '?') + key + '=' + value[i];
+                                    if (value[i]) {
+                                        query += (query.length ? '&' : '?') + key + '=' + value[i];
+                                    }
                                 }
                             } else {
-                                query += (query.length ? '&' : '?') + key + '=' + value;
+                                if (value) {
+                                    query += (query.length ? '&' : '?') + key + '=' + value;
+                                }
                             }
                         }
                     }
