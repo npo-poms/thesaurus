@@ -38,8 +38,43 @@ public class Utils implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
+    @Override
+    public void setApplicationContext(@NonNull  ApplicationContext applicationContext) throws BeansException {
+        Utils.applicationContext = applicationContext;
+    }
 
-    public static String jws(
+    public static String jws(@NonNull String subject, @NonNull Instant expiration) {
+
+        PropertiesUtil properties = applicationContext.getBeanProvider(PropertiesUtil.class).getIfAvailable();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof InetOrgPerson) {
+            String authentication = ((InetOrgPerson) principal).getUsername();
+            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
+        } else {
+            String authentication = principal.toString();
+            log.debug("No valid authentication found");
+            return "";
+        }
+    }
+
+
+    public static String buildJsonArray(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
+        List<Map<String, String>> result = new ArrayList<>();
+        for (Enum type : enumClass.getEnumConstants()) {
+            result.add(toMap(type));
+        }
+        return MAPPER.writeValueAsString(result);
+    }
+    public static String buildJsonObject(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
+        Map<String, Map<String, String>> result = new HashMap<>();
+        for (Enum type : enumClass.getEnumConstants()) {
+            result.put(type.name(), toMap(type));
+        }
+        return MAPPER.writeValueAsString(result);
+    }
+
+
+    static String jws(
         @NonNull String subject,
         @NonNull String jwsUser,
         @NonNull String jwsIssuer,
@@ -59,36 +94,6 @@ public class Utils implements ApplicationContextAware {
             .setExpiration(Date.from(expires))
             .signWith(secretKey, SignatureAlgorithm.HS256)
             .compact();
-    }
-
-    public static String jws(@NonNull String subject, @NonNull Instant expiration) {
-
-        PropertiesUtil properties = applicationContext.getBeanProvider(PropertiesUtil.class).getIfAvailable();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof InetOrgPerson) {
-            String authentication = ((InetOrgPerson) principal).getUsername();
-            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
-        } else {
-            String authentication = principal.toString();
-            log.warn("No valid authentication found");
-            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
-        }
-    }
-
-
-    public static String buildJsonArray(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
-        List<Map<String, String>> result = new ArrayList<>();
-        for (Enum type : enumClass.getEnumConstants()) {
-            result.add(toMap(type));
-        }
-        return MAPPER.writeValueAsString(result);
-    }
-    public static String buildJsonObject(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
-        Map<String, Map<String, String>> result = new HashMap<>();
-        for (Enum type : enumClass.getEnumConstants()) {
-            result.put(type.name(), toMap(type));
-        }
-        return MAPPER.writeValueAsString(result);
     }
 
     static Map<String, String> toMap(@NonNull Enum type) {
@@ -113,9 +118,4 @@ public class Utils implements ApplicationContextAware {
 
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        Utils.applicationContext = applicationContext;
-
-    }
 }

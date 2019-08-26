@@ -5,6 +5,14 @@
      var postmessage = $(".postmessage");
      var httppost    = $(".httppost");
      var callback = $("#callbackurl");
+     var readonly = $("#readonly");
+
+     var jwt =  $("meta[name=jwt]").attr("content");
+     var mustBeReadOnly = jwt === '';
+     if (mustBeReadOnly) {
+         readonly.prop("checked", true);
+         readonly.prop("readonly", true);
+     }
 
      function showPerson() {
          concept.hide();
@@ -48,14 +56,15 @@
              id: $('#id').val(),
              role: role.val()
          };
-          var schemes = $('#schemes').val();
-          if (schemes.length > 0) {
-              options.schemes = schemes;
-          }
+         var schemes = $('#schemes').val();
+         if (schemes.length > 0) {
+             options.schemes = schemes;
+         }
 
-         var readonly = $("#readonly")[0].checked;
+
+         var readonly = readonly[0].checked;
          if (! readonly) {
-             options.jwt =  $("meta[name=jwt]").attr("content");
+             options.jwt = jwt;
              options.jwtExpiraton = $("meta[name=jwtExpiration]").attr("content");
 
          }

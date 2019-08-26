@@ -27,9 +27,9 @@
     <title>POMS GTAA</title>
     <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript"><jsp:text></jsp:text></script>
     <script src="//code.jquery.com/jquery-3.4.1.min.js" type="application/javascript"><jsp:text></jsp:text></script>
-    <script src="index.js" type="application/javascript"><jsp:text></jsp:text></script>
+    <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript"><jsp:text></jsp:text></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/thesaurus/example/index.css"/>
     <meta name="jwt"  content="${requestScope.jwt}" />
     <meta name="jwtExpiraton"  content="${requestScope.jwtExpiration}" />
     <meta name="contextPath"  content="${pageContext.request.contextPath}" />

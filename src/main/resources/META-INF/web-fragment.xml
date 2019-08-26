@@ -14,9 +14,17 @@
     <servlet-name>popup.js</servlet-name>
     <jsp-file>/thesaurus/popup.js/index.jsp</jsp-file>
   </servlet>
+  <servlet>
+    <servlet-name>example-secure</servlet-name>
+    <jsp-file>/thesaurus/example/index.jspx</jsp-file>
+  </servlet>
   <servlet-mapping>
     <servlet-name>example-callback</servlet-name>
     <url-pattern>/thesaurus/example/callback</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>example-secure</servlet-name>
+    <url-pattern>/thesaurus/example/secure</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>popup.js</servlet-name>
