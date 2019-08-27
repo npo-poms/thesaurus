@@ -92,7 +92,6 @@
                          $('#id').val(concept.id);
                          $('#schemes').val(concept.objectType);
                          if (data.role) {
-                             console.log(data.role);
                              role.val(data.role.name);
                          }
                      } else {
