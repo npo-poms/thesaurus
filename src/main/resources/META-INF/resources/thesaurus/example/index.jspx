@@ -71,7 +71,9 @@
           <input type="text"
                  id="callbackurl"
                  value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback"/>
-          <p>
+        </div>
+        <div class="col-12">
+           <p>
             Het is mogelijk om een 'callback url' parameter mee te geven aan de popup. Als je dat niet doet dan wordt het gevonden concept via een 'window.postMessage' terug gepost naar de caller, maar als je dat <em>wel</em> doet dan wordt het concept gepost naar deze URL (en het resultaat <em>daarvan</em> wordt naar de caller gepost).
           </p>
         </div>
@@ -80,7 +82,9 @@
         <div class="col-6">
           <label for="id">Read only:</label>
           <input type="checkbox" id="readonly"/>
-          <p>
+        </div>
+        <div class="col-12">
+           <p>
             Als je de popup 'read only' gebruikt dan geef je geen JWT-string mee. Je kunt dan alleen zoeken en selecteren, maar geen nieuwe concepten voorstellen bij B&amp;G.
           </p>
           <p id="loginlink">
@@ -101,9 +105,10 @@
             <label for="familyName">Familienaam:</label>
             <input type="text" id="familyName"/>
           </div>
-          <p>
+          <p class="col-12">
             Voor personen onderscheiden we 'given name' en 'family name'. Dit wordt niet werkelijk ondersteund door de GTAA, maar wij ondersteunen parsen en samenstellen.
           </p>
+
         </div>
 
         <div id="concept" class="row concept">
@@ -111,6 +116,9 @@
             <label for="name">Naam:</label>
             <input type="text" id="name"/>
           </div>
+          <p class="col-12">
+            Ieder GTAA-concept heeft een 'naam'.
+          </p>
         </div>
 
         <div class="row role">
@@ -127,8 +135,9 @@
           <div class="col-6">
             <label for="id">GTAA ID ( full GTAA uri ):</label>
             <input type="text" id="id"/>
-            <p>Dit is het daadwerkelijke id dat geassocieerd is met het concept. Hiermee worden koppelingen gemaakt.</p>
+
           </div>
+          <p class="col-12">Dit is het daadwerkelijke id dat geassocieerd is met het concept. Hiermee worden koppelingen gemaakt.</p>
         </div>
       </div>
 
