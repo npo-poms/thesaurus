@@ -1,11 +1,11 @@
 <jsp:root
-  xmlns:jsp="http://java.sun.com/JSP/Page"
-  version="2.0"
-  xmlns:c="http://java.sun.com/jsp/jstl/core" >
-  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    version="2.0"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
   <jsp:output
       doctype-root-element="HTML"
-              doctype-system="about:legacy-compat" />
+      doctype-system="about:legacy-compat"/>
   <jsp:directive.page import="java.util.Arrays"/>
   <jsp:directive.page import="nl.vpro.domain.gtaa.Scheme"/>
   <jsp:directive.page import="nl.vpro.thesaurus.Utils"/>
@@ -22,118 +22,133 @@
     request.setAttribute("jwt", Utils.jws("Example", expiration));
     request.setAttribute("gtaaSchemes", Arrays.asList(Scheme.values()));
   </jsp:scriptlet>
-  <html  lang="nl">
+  <html lang="nl">
   <head>
     <title>POMS GTAA</title>
-    <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript"><jsp:text></jsp:text></script>
-    <script src="//code.jquery.com/jquery-3.4.1.min.js" type="application/javascript"><jsp:text></jsp:text></script>
-    <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript"><jsp:text></jsp:text></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
+    <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript">
+      <jsp:text></jsp:text>
+    </script>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js" type="application/javascript">
+      <jsp:text></jsp:text>
+    </script>
+    <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">
+      <jsp:text></jsp:text>
+    </script>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/thesaurus/example/index.css"/>
-    <meta name="jwt"  content="${requestScope.jwt}" />
-    <meta name="jwtExpiraton"  content="${requestScope.jwtExpiration}" />
-    <meta name="contextPath"  content="${pageContext.request.contextPath}" />
+    <meta name="jwt" content="${requestScope.jwt}"/>
+    <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
+    <meta name="contextPath" content="${pageContext.request.contextPath}"/>
   </head>
   <body>
-  <div class="poms-form form-fields">
-    <div class="form-fields">
+  <div class="poms-form form-fields col-8">
+    <div class="row">
+      <h1>GTAA - Voorbeeld</h1>
+      <p>
+        <jsp:text>Binnen de GTAA thesaurus is het mogelijk om op verschillende assen naar naar termen te zoeken. De mogelijke assen zijn te vinden op</jsp:text>
+        <a href="http://openskos.org/api/collections/beg:gtaa.html">gtaa conceptSchemes</a>
+        <jsp:text>lijst.</jsp:text>
+      </p>
+      <p>Vul het volgend formulier (alle velden zijn optioneel) en druk op 'Open'.</p>
+    </div>
+    <form action="">
+      <div class="row">
+        <div class="col-6">
+          <select id="schemes" multiple="multiple" style="max-height:400px; height: 120px;">
+            <c:forEach var="gtaaScheme" items="${gtaaSchemes}">
+              <option value="${gtaaScheme.name()}">
+                <c:out value="${gtaaScheme.pluralDisplayName.get()}"/>
+              </option>
+            </c:forEach>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="id">Callback:</label>
+          <input type="checkbox" id="usecallbackurl"/>
+          <input type="text"
+                 id="callbackurl"
+                 value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback"/>
+          <p>
+            Het is mogelijk om een 'callback url' parameter mee te geven aan de popup. Als je dat niet doet dan wordt het gevonden concept via een 'window.postMessage' terug gepost naar de caller, maar als je dat <em>wel</em> doet dan wordt het concept gepost naar deze URL (en het resultaat <em>daarvan</em> wordt naar de caller gepost).
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="id">Read only:</label>
+          <input type="checkbox" id="readonly"/>
+          <p>
+            Als je de popup 'read only' gebruikt dan geef je geen JWT-string mee. Je kunt dan alleen zoeken en selecteren, maar geen nieuwe concepten voorstellen bij B&amp;G.
+          </p>
+          <p id="loginlink">
+                Je bent niet ingelogd. De thesaurus is dus altijd ready only.
+                <a id="loginlink"
+                   href="${pageContext.request.contextPath}/thesaurus/example/secure">log nu in</a>
 
-      <div class="col-8"> <!-- ridiculous amounts of div's, this is because we borrow the CSS of the POMS GUI for consistent styling-->
+          </p>
+        </div>
+      </div>
+      <div class="fields row">
+        <div id="person" class="hide row person">
+          <div class="col-6">
+            <label for="givenName">Voornaam:</label>
+            <input type="text" id="givenName"/>
+          </div>
+          <div class="col-6">
+            <label for="familyName">Familienaam:</label>
+            <input type="text" id="familyName"/>
+          </div>
+          <p>
+            Voor personen onderscheiden we 'given name' en 'family name'. Dit wordt niet werkelijk ondersteund door de GTAA, maar wij ondersteunen parsen en samenstellen.
+          </p>
+        </div>
+
+        <div id="concept" class="row concept">
+          <div class="col-6">
+            <label for="name">Naam:</label>
+            <input type="text" id="name"/>
+          </div>
+        </div>
+
+        <div class="row role">
+          <div class="col-6">
+            <label for="name">Rol:</label>
+            <input type="text" id="role"/>
+            <p>
+              Bij het koppelen van een concept is soms een 'rol' relevant. Dit is dus geen onderdeel van het concept zelf.
+            </p>
+          </div>
+        </div>
 
         <div class="row">
-          <h1>GTAA - Voorbeeld</h1>
-          <p>
-            <jsp:text>Binnen de GTAA thesaurus is het mogelijk om op verschillende assen naar naar termen te zoeken. De mogelijke assen zijn te vinden op </jsp:text>
-            <a href="http://openskos.org/api/collections/beg:gtaa.html">gtaa conceptSchemes</a>
-            <jsp:text>lijst.</jsp:text>
-          </p>
-          <p>Vul het volgend formulier (alle velden zijn optioneel) en druk op 'Open'.</p>
+          <div class="col-6">
+            <label for="id">GTAA ID ( full GTAA uri ):</label>
+            <input type="text" id="id"/>
+            <p>Dit is het daadwerkelijke id dat geassocieerd is met het concept. Hiermee worden koppelingen gemaakt.</p>
+          </div>
         </div>
-        <form action="">
-
-
-          <div class="row">
-            <div class="col-6">
-              <select id="schemes" multiple="multiple" style="max-height:400px; height: 120px;">
-                <c:forEach var="gtaaScheme" items="${gtaaSchemes}">
-                  <option value="${gtaaScheme.name()}">
-                    <c:out value="${gtaaScheme.pluralDisplayName.get()}" />
-                  </option>
-                </c:forEach>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <label for="id">Callback:</label>
-              <input type="checkbox" id="usecallbackurl" />
-              <input type="text"
-                     id="callbackurl"
-                     value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <label for="id">Readonly:</label>
-              <input type="checkbox" id="readonly" />
-              <span id="loginlink">
-                Je bent niet ingelogd. De thesaurus is dus altijd readyonly.
-                <a id="loginlink"
-                 href="${pageContext.request.contextPath}/thesaurus/example/secure">login nu</a>
-
-              </span>
-            </div>
-          </div>
-          <div class="fields row">
-            <div id="person" class="hide row person">
-              <div class="col-6">
-                <label for="givenName">Voornaam:</label>
-                <input type="text" id="givenName"/>
-              </div>
-              <div class="col-6">
-              <label for="familyName">Familienaam:</label>
-                <input type="text" id="familyName"/>
-              </div>
-            </div>
-
-            <div id="concept" class="row concept">
-              <div class="col-6">
-                <label for="name">Naam:</label>
-                <input type="text" id="name"/>
-              </div>
-            </div>
-
-            <div class="row role">
-              <div class="col-6">
-                <label for="name">Rol:</label>
-                <input type="text" id="role"/>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-6">
-                <label for="id">GTAA ID ( full GTAA uri ):</label>
-                <input type="text" id="id"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <button id="open" class="btn-rect">Open</button>
-            <button id="reset" class="btn-rect" type="reset">Clear</button>
-          </div>
-          <div id="result" class="row">
-            <label for="json">
-              <span class="postmessage">Resultaat (postMessage):</span>
-              <span style="display: none" class="httppost">Response van de callback:</span>
-            </label>
-            <textarea cols="100" rows="160" id="json"><jsp:text></jsp:text></textarea>
-          </div>
-        </form>
       </div>
-    </div>
+
+      <div class="row">
+        <button id="open" class="btn-rect">Open</button>
+        <button id="reset" class="btn-rect" type="reset">Clear</button>
+      </div>
+      <div id="result" class="row">
+        <label for="json">
+          <span class="postmessage">Resultaat (postMessage):</span>
+          <span style="display: none" class="httppost">Response van de callback:</span>
+        </label>
+        <textarea cols="100" rows="160" id="json"><jsp:text></jsp:text></textarea>
+      </div>
+    </form>
+    <p>De implementatie van deze pagina vind je <a
+        href="https://github.com/npo-poms/thesaurus/tree/master/src/main/resources/META-INF/resources/thesaurus/example">hier</a>
+    </p>
   </div>
-  <p>De implementatie van deze pagina vind je <a href="https://github.com/npo-poms/thesaurus/tree/master/src/main/resources/META-INF/resources/thesaurus/example">hier</a></p>
+
   </body>
   </html>
 </jsp:root>
