@@ -9,7 +9,6 @@
 
      var jwt =  $("meta[name=jwt]").attr("content");
      var mustBeReadOnly = jwt === '';
-     console.log(mustBeReadOnly);
      if (mustBeReadOnly) {
          readonly.prop("checked", true);
          readonly.prop("readonly", "readonly");
@@ -102,6 +101,7 @@
 
 
                  }
+                 // this is a trick to format the json nicely.
                  $('#json').val(JSON.stringify(JSON.parse(JSON.stringify(data)), null, 2));
 
              }, options
