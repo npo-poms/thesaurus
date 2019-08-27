@@ -63,6 +63,9 @@
             </c:forEach>
           </select>
         </div>
+        <p class="col-6">
+          Kies welke concepten je wilt zoeken (leeg laten is zoeken in alles)
+        </p>
       </div>
       <div class="row">
         <div class="col-6">
@@ -72,7 +75,7 @@
                  id="callbackurl"
                  value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/thesaurus/example/callback"/>
         </div>
-        <div class="col-12">
+        <div class="col-6">
            <p>
             Het is mogelijk om een 'callback url' parameter mee te geven aan de popup. Als je dat niet doet dan wordt het gevonden concept via een 'window.postMessage' terug gepost naar de caller, maar als je dat <em>wel</em> doet dan wordt het concept gepost naar deze URL (en het resultaat <em>daarvan</em> wordt naar de caller gepost).
           </p>
@@ -83,13 +86,14 @@
           <label for="id">Read only:</label>
           <input type="checkbox" id="readonly"/>
         </div>
-        <div class="col-12">
+        <div class="col-6">
+
            <p>
             Als je de popup 'read only' gebruikt dan geef je geen JWT-string mee. Je kunt dan alleen zoeken en selecteren, maar geen nieuwe concepten voorstellen bij B&amp;G.
           </p>
           <p id="loginlink">
                 Je bent niet ingelogd. De thesaurus is dus altijd ready only.
-                <a id="loginlink"
+                <a
                    href="${pageContext.request.contextPath}/thesaurus/example/secure">log nu in</a>
 
           </p>
@@ -105,7 +109,7 @@
             <label for="familyName">Familienaam:</label>
             <input type="text" id="familyName"/>
           </div>
-          <p class="col-12">
+          <p class="col-6">
             Voor personen onderscheiden we 'given name' en 'family name'. Dit wordt niet werkelijk ondersteund door de GTAA, maar wij ondersteunen parsen en samenstellen.
           </p>
 
@@ -116,7 +120,7 @@
             <label for="name">Naam:</label>
             <input type="text" id="name"/>
           </div>
-          <p class="col-12">
+          <p class="col-6">
             Ieder GTAA-concept heeft een 'naam'.
           </p>
         </div>
@@ -125,10 +129,10 @@
           <div class="col-6">
             <label for="name">Rol:</label>
             <input type="text" id="role"/>
-            <p>
+          </div>
+           <p class="col-6">
               Bij het koppelen van een concept is soms een 'rol' relevant. Dit is dus geen onderdeel van het concept zelf.
             </p>
-          </div>
         </div>
 
         <div class="row">
@@ -137,7 +141,7 @@
             <input type="text" id="id"/>
 
           </div>
-          <p class="col-12">Dit is het daadwerkelijke id dat geassocieerd is met het concept. Hiermee worden koppelingen gemaakt.</p>
+          <p class="col-6">Dit is het daadwerkelijke id dat geassocieerd is met het concept. Hiermee worden koppelingen gemaakt.</p>
         </div>
       </div>
 
