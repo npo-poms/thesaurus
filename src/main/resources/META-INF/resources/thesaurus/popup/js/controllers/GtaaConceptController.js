@@ -173,11 +173,10 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
                 r.sort(function(a, b){
                     // mainly: leave the 'new concept' hack where it is.
                     {
-                        if (a.id === null && b.id !== null) {
+                        if (a.id == null && b.id != null) {
                             return 1;
                         }
-                        if (a.id !== null && b.id === null) {
-
+                        if (a.id != null && b.id == null) {
                             return -1;
                         }
                     }
