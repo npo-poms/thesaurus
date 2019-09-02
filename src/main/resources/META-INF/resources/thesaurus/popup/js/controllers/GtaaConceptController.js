@@ -171,9 +171,15 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
             function ( result ) {
                 var r =  result.map( addFields );
                 r.sort(function(a, b){
-                    if (a.id === b.id || a.id === null || b.id === null) {
-                        // mainly: leave the 'new concept' hack where it is.
-                        return 0;
+                    // mainly: leave the 'new concept' hack where it is.
+                    {
+                        if (a.id === null && b.id !== null) {
+                            return 1;
+                        }
+                        if (a.id !== null && b.id === null) {
+
+                            return -1;
+                        }
                     }
                     return a.id === $location.search().id ? -1 : (b.id === $location.search().id ? 1 : 0)});
                 $scope.suggestionsWaiting = false;
