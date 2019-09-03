@@ -24,46 +24,20 @@
      function showConcept() {
          concept.show();
          person.hide();
-
      }
-     $(".hide").hide();
-     callback.hide();
-     $("#usecallbackurl").change(function() {
-         if (this.checked) {
-             callback.show();
-             postmessage.hide();
-             httppost.show();
-         } else {
-             callback.hide();
-             postmessage.show();
-             httppost.hide();
-         }
-     });
-     $("#schemes").change(function() {
-         var arr = $(this).val();
-         if (arr.length === 1 && arr[0] === 'person') {
-             showPerson();
-         } else {
-             showConcept();
-         }
-     });
-     $("#reset").click(function() {
-         showConcept();
-     });
-     $("#open").click(function (event) {
-         event.preventDefault();
+     function open(iframe) {
          var options = {
              name: $('#name').val(),
              givenName: $('#givenName').val(),
              familyName: $('#familyName').val(),
              id: $('#id').val(),
-             role: role.val()
+             role: role.val(),
+             iframe: iframe
          };
          var schemes = $('#schemes').val();
          if (schemes.length > 0) {
              options.schemes = schemes;
          }
-
 
          var ro = readonly[0].checked;
          if (! ro) {
@@ -75,6 +49,7 @@
          }
          gtaa.open(
              function (data) {
+                 $("#modal").hide();
                  if (typeof data === 'object') {
                      var concept = data.concept;
                      if (concept) {
@@ -105,5 +80,39 @@
 
              }, options
          );
+
+     }
+     $(".hide").hide();
+     callback.hide();
+     callback.change(function() {
+         if (this.checked) {
+             callback.show();
+             postmessage.hide();
+             httppost.show();
+         } else {
+             callback.hide();
+             postmessage.show();
+             httppost.hide();
+         }
+     });
+     $("#schemes").change(function() {
+         var arr = $(this).val();
+         if (arr.length === 1 && arr[0] === 'person') {
+             showPerson();
+         } else {
+             showConcept();
+         }
+     });
+     $("#reset").click(function() {
+         showConcept();
+     });
+     $("#open").click(function (event) {
+         event.preventDefault();
+         open();
+     });
+     $("#openmodal").click(function (event) {
+         event.preventDefault();
+         $("#modal").show();
+         open("iframe");
      });
  });

@@ -147,6 +147,7 @@
 
       <div class="row">
         <button id="open" class="btn-rect">Open</button>
+        <button id="openmodal" class="btn-rect">Open (modal)</button>
         <button id="reset" class="btn-rect" type="reset">Clear</button>
       </div>
       <div id="result" class="row">
@@ -160,6 +161,11 @@
     <p>De implementatie van deze pagina vind je <a
         href="https://github.com/npo-poms/thesaurus/tree/master/src/main/resources/META-INF/resources/thesaurus/example">hier</a>
     </p>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <iframe id="iframe"> </iframe>
+    </div>
   </div>
 
   </body>

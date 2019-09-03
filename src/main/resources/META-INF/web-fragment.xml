@@ -12,7 +12,7 @@
   </servlet>
   <servlet>
     <servlet-name>popup.js</servlet-name>
-    <jsp-file>/thesaurus/popup.js/index.jsp</jsp-file>
+    <jsp-file>/thesaurus/popup.js/index.js.jsp</jsp-file>
   </servlet>
   <servlet>
     <servlet-name>example-secure</servlet-name>

@@ -14,13 +14,13 @@ var gtaa = {
         + request.getContextPath() %>';
 
         var popup;
-        var iframe;
         var query = '';
-
+        var iframeId;
         if (options) {
-            // All (recognized) options are added as query parameters to the popup itself.
+
             for (var key in options) {
                 if (options.hasOwnProperty(key)) {
+                    // most (recognized) options are added as query parameters to the popup itself.
                     if ([
                         "name",
                         "givenName",
@@ -46,7 +46,14 @@ var gtaa = {
                                 }
                             }
                         }
+                    } else {
+                        if (key === 'iframe') {
+                            iframeId = options[key];
+                        } else {
+                            console && console.log("Unrecognized option", key);
+                        }
                     }
+
                 }
             }
         }
@@ -55,7 +62,7 @@ var gtaa = {
         var notIE = window.addEventListener;
         var addEventListener = window.addEventListener;
         var removeEventListener = window.removeEventListener;
-        var message = "message"
+        var message = "message";
         if (! addEventListener) {
             // support IE
             addEventListener = window.attachEvent;
@@ -74,25 +81,31 @@ var gtaa = {
         };
         // Listen to message from child window
         addEventListener(message, listener, false);
-
-        if (document.all) {
-            // some hackery to help IE, because in IE you may not post to other window, only from an iframe.
-            iframe = document.createElement('iframe');
-            iframe.setAttribute('style', 'position:absolute;display:none');
-            iframe = document.body.appendChild(iframe);
-            iframe.src = domain + '/thesaurus/IE.html' + query;
-        } else {
-            popup = window.open(domain + '/thesaurus/popup/' + query, 'gtaa-popup', 'width=1024,height=800,titlebar=no,toolbar=no,statusbar=no,directories=no,location=no');
-        }
-
-        function close(){
-            if (popup) {
-                popup.close();
+        var popupUrl = domain + '/thesaurus/popup/' + query;
+        if (iframeId) {
+            var iframe = document.getElementById(iframeId);
+            iframe.src = popupUrl;
+        } else { //open popup
+            var iframehack;
+            if (document.all) {
+                // some hackery to help IE, because in IE you may not post to other window, only from an iframe.
+                iframehack = document.createElement('iframe');
+                iframehack.setAttribute('style', 'position:absolute;display:none');
+                iframehack = document.body.appendChild(iframe);
+                iframehack.src = domain + '/thesaurus/IE.html' + query;
+            } else {
+                popup = window.open(popupUrl, 'gtaa-popup', 'width=1024,height=800,titlebar=no,toolbar=no,statusbar=no,directories=no,location=no');
             }
-            removeEventListener(message, listener);
 
-            if (iframe) {
-                iframe.parentNode.removeChild(iframe);
+            function close(){
+                if (popup) {
+                    popup.close();
+                }
+                removeEventListener(message, listener);
+
+                if (iframehack) {
+                    iframehack.parentNode.removeChild(iframe);
+                }
             }
         }
 

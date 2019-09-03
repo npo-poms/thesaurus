@@ -112,13 +112,14 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
         }
     }
     function sendToOpener(message, alertIfNoOpener) {
-        if ($window.opener) {
-            log('sending message  back to main window', message, $window.opener);
+        var opener = $window.opener || $window.parent;
+        if (opener) {
+            log('sending message  back to main window', message, opener);
             if (!document.all) {
-                $window.opener.postMessage(message, '*');
+                opener.postMessage(message, '*');
             } else {
-                if ($window.opener.postIEMessage) {
-                    $window.opener.postIEMessage(message, '*', message.action);
+                if (opener.postIEMessage) {
+                    opener.postIEMessage(message, '*', message.action);
                 }
             }
         } else {
