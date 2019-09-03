@@ -1,4 +1,4 @@
-<%@page contentType="text/javascript"
+<%@page contentType="text/javascript"  session="false"
 %><%
   response.setHeader("Cache-Control", "max-age=3600");
 %>/**
