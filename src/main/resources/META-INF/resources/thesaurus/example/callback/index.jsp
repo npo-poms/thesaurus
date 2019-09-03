@@ -1,4 +1,4 @@
-<jsp:directive.page contentType="application/json" pageEncoding="UTF-8" />
+<jsp:directive.page session="false" contentType="application/json" pageEncoding="UTF-8" />
 <jsp:directive.page import="java.io.BufferedReader" />
 {
   "info": "The gtaa popup posted to me, and I received this",
