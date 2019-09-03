@@ -3,6 +3,7 @@
 <%@page
   import="nl.vpro.util.PropertiesUtil,nl.vpro.thesaurus.Utils"
   pageEncoding="UTF-8"
+  session="false"
 %>
 <%@ page import="java.util.Objects" %>
 <%@ page import="org.springframework.web.context.ContextLoader" %>
@@ -38,7 +39,7 @@
       <script src="${pageContext.request.contextPath}/thesaurus/popup/js/controllers/GtaaConceptController.js"></script>
     </c:when>
     <c:otherwise>
-      <script src="./popup.js.jsp"> </script>
+      <script src="./index.js.jsp"> </script>
     </c:otherwise>
   </c:choose>
   <meta name="personUpdateService"  content="${requestScope.properties['npo_pageupdate_api.baseUrl']}/api/thesaurus/person"/>
