@@ -79,6 +79,16 @@ var gtaa = {
                 console && console.log(e);
             }
         };
+        function close(){
+            if (popup) {
+                popup.close();
+            }
+            removeEventListener(message, listener);
+
+            if (iframehack) {
+                iframehack.parentNode.removeChild(iframe);
+            }
+        }
         // Listen to message from child window
         addEventListener(message, listener, false);
         var popupUrl = domain + '/thesaurus/popup/' + query;
@@ -97,16 +107,6 @@ var gtaa = {
                 popup = window.open(popupUrl, 'gtaa-popup', 'width=1024,height=800,titlebar=no,toolbar=no,statusbar=no,directories=no,location=no');
             }
 
-            function close(){
-                if (popup) {
-                    popup.close();
-                }
-                removeEventListener(message, listener);
-
-                if (iframehack) {
-                    iframehack.parentNode.removeChild(iframe);
-                }
-            }
         }
 
     }
