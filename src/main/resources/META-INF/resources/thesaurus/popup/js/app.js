@@ -14,11 +14,9 @@ gtaaApp.config(function($locationProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 });
 
-function log() {
-    console && Function.apply.call(console.log, console, arguments);
-
+if (typeof console == "undefined") {
+    console = { log: function (msg) { } };
 }
-
 
 gtaaApp.directive('typeaheadFocus', function () {
     return {
