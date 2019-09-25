@@ -85,7 +85,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
         };
         $http.post(url, message, config).then(
             function (response) {
-                log("processPost", response);
+                console.log("processPost", response);
                 sendToOpener(response.data, response.status, false);
             },
             function (response) {
@@ -101,20 +101,27 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
      */
     function sendBack(webformAction) {
         var message = conceptToMessage(webformAction);
-        log("sending back ", message);
+        console.log("sending back ", message);
 
         var callbackService = $location.search().callbackService;
         if(callbackService) {
-            log('sending to back to specified endpoint', message, callbackService);
+            console.log('sending to back to specified endpoint', message, callbackService);
             processPost(message, callbackService);
         } else {
             sendToOpener(message, true)
         }
     }
     function sendToOpener(message, alertIfNoOpener) {
-        var opener = $window.opener || $window.parent;
+        var opener = $window.opener;
+        if (! opener && $window.parent !== $window) {
+            // this is an iframe
+            opener = $window.parent;
+        } else {
+            opener = null;
+
+        }
         if (opener) {
-            log('sending message  back to main window', message);
+            console.log('sending message  back to main window', message);
             if (!document.all) {
                 opener.postMessage(message, '*');
             } else {
@@ -157,7 +164,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
                     }
                 }
             } catch (e) {
-                log(e, concept);
+                console.log(e, concept);
             }
         }
         return concept;
@@ -195,7 +202,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     $scope.register = function() {
         var message = conceptToMessage();
         var concept = message.concept;
-        log("registering ", message);
+        console.log("registering ", message);
 
         $scope.error = null;
         $scope.waiting = true;
@@ -206,12 +213,12 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
                 $scope.registerNewConcept = false;
                 addFields($scope.concept);
                 $scope.waiting = false;
-                log("Submitted", concept, "became", $scope.concept);
+                console.log("Submitted", concept, "became", $scope.concept);
                 $scope.focusSubmit();
             },
             function ( error ) {
                 $scope.waiting = false;
-                log(error);
+                console.log(error);
                 error.config = error.config || {};
                 error.data = error.data || {};
                 if ( ! error.message) {
@@ -232,7 +239,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     };
 
     $scope.create = function() {
-        log('showing create form ' +  $scope.lastQuery);
+        console.log('showing create form ' +  $scope.lastQuery);
         $scope.registerNewConcept = true;
     };
 
