@@ -114,7 +114,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     function sendToOpener(message, alertIfNoOpener) {
         var opener = $window.opener || $window.parent;
         if (opener) {
-            log('sending message  back to main window', message, opener);
+            log('sending message  back to main window', message);
             if (!document.all) {
                 opener.postMessage(message, '*');
             } else {
