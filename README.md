@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/npo-poms/thesaurus.svg?)](https://travis-ci.org/npo-poms/poms-thesaurus)
 [![snapshots](https://img.shields.io/nexus/s/https/oss.sonatype.org/nl.vpro.poms/poms-thesaurus.svg)](https://oss.sonatype.org/content/repositories/staging/nl/vpro/poms/poms-thesaurus/)
 
 # thesaurus

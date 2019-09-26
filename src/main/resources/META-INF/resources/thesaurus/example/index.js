@@ -5,6 +5,7 @@
      var postmessage = $(".postmessage");
      var httppost    = $(".httppost");
      var callback = $("#callbackurl");
+     var schemes = $("#schemes");
      var readonly = $("#readonly");
 
      var jwt =  $("meta[name=jwt]").attr("content");
@@ -34,9 +35,9 @@
              role: role.val(),
              iframe: iframe
          };
-         var schemes = $('#schemes').val();
-         if (schemes.length > 0) {
-             options.schemes = schemes;
+         var schemesVal = schemes.val();
+         if (schemesVal.length > 0) {
+             options.schemes = schemesVal;
          }
 
          var ro = readonly[0].checked;
@@ -45,7 +46,7 @@
              options.jwtExpiraton = $("meta[name=jwtExpiration]").attr("content");
          }
          if ($("#usecallbackurl")[0].checked) {
-             options.callbackService = $("#callbackurl").val();
+             options.callbackService = callback.val();
          }
          gtaa.open(
              function (data) {
@@ -95,7 +96,7 @@
              httppost.hide();
          }
      });
-     $("#schemes").change(function() {
+     schemes.change(function() {
          var arr = $(this).val();
          if (arr.length === 1 && arr[0] === 'person') {
              showPerson();
