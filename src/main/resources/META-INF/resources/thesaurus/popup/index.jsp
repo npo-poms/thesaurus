@@ -60,10 +60,10 @@
             <div ng-show="!registerNewConcept && !linkedPerson" class="poms-typeahead field col-8">
               <label for="searchValue">
 
-                <jsp:text>Zoek binnen de concept-schemas</jsp:text>
+                <jsp:text>Zoek binnen {{schemes.length == 1 ? 'het concept-schema' : "de concept-schema's"}} </jsp:text>
                 <span ng-repeat="scheme in schemes">
                   {{$first ? '' : ($last ? ' en ' : ', ') }}
-                  {{scheme.label}}
+                  "{{scheme.label}}"
                 </span>
                 <jsp:text> van GTAA:</jsp:text>
               </label>
