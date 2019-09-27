@@ -102,6 +102,7 @@
   </form>
   <div class="footer-container">
     <div class="footer modal-footer footer-two-buttons">
+      <div class="footer-message">&nbsp;</div>
       <gtaa-register-footer ng-if="registerNewConcept"></gtaa-register-footer>
       <gtaa-display-footer ng-if="!registerNewConcept"></gtaa-display-footer>
     </div>
