@@ -12,7 +12,11 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
         });
     } else {
         $scope.schemes = [];
-        Object.values($scope.gtaaSchemes).forEach(function(gtaaScheme) {
+        // var values  =  Object.values($scope.gtaaSchemes); doesn't work in IE
+        var values = Object.keys($scope.gtaaSchemes).map(function(e) {
+            return $scope.gtaaSchemes[e];
+        });
+        values.forEach(function(gtaaScheme) {
             $scope.schemes.push(gtaaScheme);
         });
     }
@@ -45,7 +49,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     deletePrivates = function(object) {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-                if (key.startsWith("$")) {
+                //if (key.startsWith("$")) { // doesn't work in IE
+                if (key.indexOf("$") === 0) { // doesn't work in IE
                     delete object[key];
                     continue;
                 }
@@ -277,7 +282,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
 
     $scope.onSelect = function(item, model) {
         $scope.concept = {};
-        $scope.concept = Object.assign($scope.concept, model);
+        //$scope.concept = Object.assign($scope.concept, model);  doesn't work in IE
+        $scope.concept = angular.extend($scope.concept, model);
         if(model.$create) {
             $scope.create();
         } else {
