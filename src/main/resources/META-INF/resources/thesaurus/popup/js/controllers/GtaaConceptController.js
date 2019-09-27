@@ -118,12 +118,15 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     }
     function sendToOpener(message, alertIfNoOpener) {
         var opener = $window.opener;
-        if (! opener && $window.parent !== $window) {
-            // this is an iframe
-            opener = $window.parent;
-        } else {
-            opener = null;
-
+        if (! opener) {
+            if ($window.parent !== $window) {
+                // this is an iframe
+                console.log("iframe");
+                opener = $window.parent;
+            } else {
+                console.log("no opener");
+                opener = null;
+            }
         }
         if (opener) {
             console.log('sending message  back to main window', message);
