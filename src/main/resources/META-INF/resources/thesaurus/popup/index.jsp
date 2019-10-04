@@ -60,10 +60,10 @@
             <div ng-show="!registerNewConcept && !linkedPerson" class="poms-typeahead field col-8">
               <label for="searchValue">
 
-                <jsp:text>Zoek binnen de concept-schemas</jsp:text>
+                <jsp:text>Zoek binnen {{schemes.length == 1 ? 'het concept-schema' : "de concept-schema's"}} </jsp:text>
                 <span ng-repeat="scheme in schemes">
                   {{$first ? '' : ($last ? ' en ' : ', ') }}
-                  {{scheme.label}}
+                  "{{scheme.label}}"
                 </span>
                 <jsp:text> van GTAA:</jsp:text>
               </label>
@@ -99,9 +99,10 @@
 
       </div>
     </div>
+
   </form>
   <div class="footer-container">
-    <div class="footer modal-footer footer-two-buttons">
+    <div class="footer modal-footer footer-buttons">
       <gtaa-register-footer ng-if="registerNewConcept"></gtaa-register-footer>
       <gtaa-display-footer ng-if="!registerNewConcept"></gtaa-display-footer>
     </div>
