@@ -15,7 +15,7 @@
   <description>Thesaurus</description>
 
   <properties>
-    <poms.shared.version>5.11.0</poms.shared.version>
+    <poms.shared.version>5.11.1</poms.shared.version>
   </properties>
 
 
@@ -39,7 +39,7 @@
       <groupId>nl.vpro.poms</groupId>
       <artifactId>poms-shared-domain</artifactId>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>nl.vpro.poms</groupId>
       <artifactId>gtaa-domain</artifactId>
     </dependency>
