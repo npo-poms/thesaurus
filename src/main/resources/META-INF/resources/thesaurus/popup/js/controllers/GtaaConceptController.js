@@ -6,12 +6,18 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     $scope.personRoles = $window.serverInfo.personRoles;
     $scope.gtaaSchemes = $window.serverInfo.gtaaSchemes;
 
+    $scope.schemes = [];
     if ($location.search().schemes) {
-        $scope.schemes = $location.search().schemes.split(',').map(function (s) {
-            return $scope.gtaaSchemes[s];
-        });
+        var schemes = $location.search().schemes;
+        if (! Array.isArray(schemes)) { // angular is really helping us (not)
+            schemes = [schemes];
+        }
+        schemes.forEach(function(oneschemes) {
+            oneschemes.split(',').forEach(function(s) {
+                $scope.schemes.push($scope.gtaaSchemes[s]);
+            });
+        })
     } else {
-        $scope.schemes = [];
         // var values  =  Object.values($scope.gtaaSchemes); doesn't work in IE
         var values = Object.keys($scope.gtaaSchemes).map(function(e) {
             return $scope.gtaaSchemes[e];
