@@ -6,13 +6,23 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     $scope.personRoles = $window.serverInfo.personRoles;
     $scope.gtaaSchemes = $window.serverInfo.gtaaSchemes;
 
+    $scope.schemes = [];
     if ($location.search().schemes) {
-        $scope.schemes = $location.search().schemes.split(',').map(function (s) {
-            return $scope.gtaaSchemes[s];
-        });
+        var schemes = $location.search().schemes;
+        if (! Array.isArray(schemes)) { // angular is really helping us (not)
+            schemes = [schemes];
+        }
+        schemes.forEach(function(oneschemes) {
+            oneschemes.split(',').forEach(function(s) {
+                $scope.schemes.push($scope.gtaaSchemes[s]);
+            });
+        })
     } else {
-        $scope.schemes = [];
-        Object.values($scope.gtaaSchemes).forEach(function(gtaaScheme) {
+        // var values  =  Object.values($scope.gtaaSchemes); doesn't work in IE
+        var values = Object.keys($scope.gtaaSchemes).map(function(e) {
+            return $scope.gtaaSchemes[e];
+        });
+        values.forEach(function(gtaaScheme) {
             $scope.schemes.push(gtaaScheme);
         });
     }
@@ -45,7 +55,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     deletePrivates = function(object) {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
-                if (key.startsWith("$")) {
+                //if (key.startsWith("$")) { // doesn't work in IE
+                if (key.indexOf("$") === 0) { // doesn't work in IE
                     delete object[key];
                     continue;
                 }
@@ -113,12 +124,15 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     }
     function sendToOpener(message, alertIfNoOpener) {
         var opener = $window.opener;
-        if (! opener && $window.parent !== $window) {
-            // this is an iframe
-            opener = $window.parent;
-        } else {
-            opener = null;
-
+        if (! opener) {
+            if ($window.parent !== $window) {
+                // this is an iframe
+                console.log("iframe");
+                opener = $window.parent;
+            } else {
+                console.log("no opener");
+                opener = null;
+            }
         }
         if (opener) {
             console.log('sending message  back to main window', message);
@@ -277,7 +291,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
 
     $scope.onSelect = function(item, model) {
         $scope.concept = {};
-        $scope.concept = Object.assign($scope.concept, model);
+        //$scope.concept = Object.assign($scope.concept, model);  doesn't work in IE
+        $scope.concept = angular.extend($scope.concept, model);
         if(model.$create) {
             $scope.create();
         } else {
