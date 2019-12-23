@@ -72,8 +72,10 @@ public class Utils implements ApplicationContextAware {
 
     public static String buildJsonArray(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
         List<Map<String, String>> result = new ArrayList<>();
-        for (Enum type : enumClass.getEnumConstants()) {
-            result.add(toMap(type));
+        for (Enum<?> type : enumClass.getEnumConstants()) {
+            result.add(
+                toMap(type)
+            );
         }
         return MAPPER.writeValueAsString(result);
     }
@@ -85,7 +87,7 @@ public class Utils implements ApplicationContextAware {
 
     public static String buildJsonObject(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
         Map<String, Map<String, String>> result = new HashMap<>();
-        for (Enum type : enumClass.getEnumConstants()) {
+        for (Enum<?> type : enumClass.getEnumConstants()) {
             result.put(type.name(), toMap(type));
         }
         return MAPPER.writeValueAsString(result);
@@ -120,7 +122,7 @@ public class Utils implements ApplicationContextAware {
         if (type instanceof Displayable) {
             Displayable displayable = (Displayable) type;
             displayable.getPluralDisplayName().ifPresent((pluralLabel) -> {
-                item.put("plurallabel", pluralLabel.toString());
+                item.put("pluralLabel", pluralLabel.toString());
             });
             item.put("label", displayable.getDisplayName());
         } else {

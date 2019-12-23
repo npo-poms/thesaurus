@@ -39,7 +39,7 @@
     <div class="col-8 field">
       <label label-for="role">Role: </label>
       <select id="role"
-              ng-options="item as item.label for item in personRoles track by item.name"
+              ng-options="item as item.pluralLabel for item in creditRoles track by item.name"
               ng-model="concept.$role"></select>
     </div>
   </div>

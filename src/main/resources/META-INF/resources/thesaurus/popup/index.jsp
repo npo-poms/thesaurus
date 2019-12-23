@@ -28,7 +28,7 @@
       var serverInfo = {
           ctx: "${pageContext.request.contextPath}",
           geoRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.GeoRoleType.class) %>,
-          personRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.RoleType.class) %>,
+          creditRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.RoleType.class) %>,
           gtaaSchemes: <%=Utils.buildJsonObject(nl.vpro.domain.gtaa.Scheme.class) %>
       }
   </script>
@@ -92,8 +92,8 @@
         <hr />
         <div ng-if="!registerNewConcept && concept.id">
           <gtaa-geographicname-form ng-if="isGeographicName(concept)"></gtaa-geographicname-form>
-          <gtaa-person-form ng-if="isPerson(concept)"></gtaa-person-form>
-          <gtaa-concept-form ng-if="!isPerson(concept) && !isGeographicName(concept)"></gtaa-concept-form>
+          <gtaa-creditable-form ng-if="isCreditable(concept)"></gtaa-creditable-form>
+          <gtaa-concept-form ng-if="!isCreditable(concept) && !isGeographicName(concept)"></gtaa-concept-form>
         </div>
         <gtaa-register-form ng-if="registerNewConcept"></gtaa-register-form>
 

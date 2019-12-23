@@ -3,7 +3,10 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
     document.querySelector('#searchValue').focus();
     this.submitConcept = function(concept, secret) {
         var deferred = $q.defer();
+
         var isPerson = concept.objectType === 'person';
+        var isCreditable = isPerson || concept.objectType === 'name';
+
         var newConcept = {
             objectType: concept.objectType,
             scopeNotes: concept.scopeNotes

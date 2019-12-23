@@ -3,7 +3,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     $scope.registerNewConcept = false;
 
     $scope.geoRoles    = $window.serverInfo.geoRoles;
-    $scope.personRoles = $window.serverInfo.personRoles;
+    $scope.creditRoles = $window.serverInfo.creditRoles;
     $scope.gtaaSchemes = $window.serverInfo.gtaaSchemes;
 
     if ($location.search().schemes) {
@@ -301,6 +301,10 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
 
     $scope.isPerson = function(concept) {
         return (concept instanceof Object) && concept.objectType === "person";
+    };
+
+    $scope.isCreditable = function(concept) {
+        return (concept instanceof Object) && (concept.objectType === "person" || concept.objectType === "name");
     };
 
     $scope.isGeographicName= function(concept) {
