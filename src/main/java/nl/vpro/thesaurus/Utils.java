@@ -45,20 +45,23 @@ public class Utils implements ApplicationContextAware {
 
     /**
      * Given the subject, calculates a JWT-string for the currenly logged in user.
-     * @param subject
-     * @param expiration
+     * @param subject Subject
+     * @param expiration and expiration date neede for the jws
      * @return The JWT-string, or an empty string if there is no currently logged in user.
      */
     public static String jws(@NonNull String subject, @NonNull Instant expiration) {
 
         PropertiesUtil properties = applicationContext.getBeanProvider(PropertiesUtil.class).getIfAvailable();
+        if (properties == null) {
+            throw new RuntimeException("No properties found on application context");
+        }
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof InetOrgPerson) {
             String authentication = ((InetOrgPerson) principal).getUsername();
             return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
         } else {
             String authentication = principal.toString();
-            log.debug("No valid authentication found");
+            log.debug("No valid authentication found {}", authentication);
             return "";
         }
     }
@@ -66,7 +69,7 @@ public class Utils implements ApplicationContextAware {
     /**
      * Represents an enum as a json array of objects, where each each map entry at least contains a 'name' (the name of the enum) key and a 'label' (defaults to its {@link Object#toString()} value) but it
      * can contain more values depending on which enum it actually is (it e.g. may implement {@link Displayable}, and may also have
-     * a 'plurallabel')).
+     * a 'pluralLabel')).
      * @param enumClass The class of the enum to represent all possible values of.
      */
 
@@ -81,7 +84,7 @@ public class Utils implements ApplicationContextAware {
     }
 
      /**
-      * Represents an enum as a json object of objects, the keys are the enum's '{@link Enum#name()}} and the values are the same values as in {@link #buildJsonObject(Class)}
+      * Represents an enum as a json object of objects, the keys are the enum's '{@link Enum#name()}} and the values are the same values as in {@link #buildJsonArray(Class)}
      * @param enumClass The class of the enum to represent all possible values of.
      */
 
@@ -101,6 +104,9 @@ public class Utils implements ApplicationContextAware {
         @NonNull Instant  expires) {
 
         PropertiesUtil properties = applicationContext.getBeanProvider(PropertiesUtil.class).getIfAvailable();
+        if (properties == null) {
+            throw new RuntimeException("No properties found on application context");
+        }
         String key = properties.getMap().get("gtaa.example.key");
 
 
@@ -116,14 +122,14 @@ public class Utils implements ApplicationContextAware {
             .compact();
     }
 
-    static Map<String, String> toMap(@NonNull Enum type) {
+    static Map<String, String> toMap(@NonNull Enum<?> type) {
         Map<String, String> item = new HashMap<>();
         item.put("name", type.name());
         if (type instanceof Displayable) {
             Displayable displayable = (Displayable) type;
-            displayable.getPluralDisplayName().ifPresent((pluralLabel) -> {
-                item.put("pluralLabel", pluralLabel.toString());
-            });
+            displayable.getPluralDisplayName().ifPresent((pluralLabel) ->
+                item.put("pluralLabel", pluralLabel.toString())
+            );
             item.put("label", displayable.getDisplayName());
         } else {
             item.put("label", type.toString());
