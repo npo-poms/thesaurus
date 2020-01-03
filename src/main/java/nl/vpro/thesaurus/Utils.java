@@ -16,7 +16,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.ldap.userdetails.InetOrgPerson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,9 +58,6 @@ public class Utils implements ApplicationContextAware {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof Principal) {
             String authentication = ((Principal) principal).getName();
-            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
-        } else if (principal instanceof InetOrgPerson) {
-            String authentication = ((InetOrgPerson) principal).getUsername();
             return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
         } else {
             String authentication = principal.toString();
