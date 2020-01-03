@@ -30,8 +30,6 @@ NpoApiAuthentication.prototype = {
         }
 
         var base64 = CryptoJS.HmacSHA256(data, this.apiSecret).toString(CryptoJS.enc.Base64);
-        //var base64 =  btoa(CryptoJS.HmacSHA256(data, this.apiSecret));
-        //console.log("encoding with ", data, this.apiSecret, base64);
         return base64;
     },
 

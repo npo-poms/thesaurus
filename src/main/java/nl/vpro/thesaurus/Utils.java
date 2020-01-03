@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
+import java.security.Principal;
 import java.time.Instant;
 import java.util.*;
 
@@ -56,7 +57,10 @@ public class Utils implements ApplicationContextAware {
             throw new RuntimeException("No properties found on application context");
         }
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof InetOrgPerson) {
+        if (principal instanceof Principal) {
+            String authentication = ((Principal) principal).getName();
+            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
+        } else if (principal instanceof InetOrgPerson) {
             String authentication = ((InetOrgPerson) principal).getUsername();
             return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
         } else {
