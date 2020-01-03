@@ -47,7 +47,6 @@
   <meta name="conceptUpdateService" content="${requestScope.properties['npo_pageupdate_api.baseUrl']}/api/thesaurus/concept"/>
   <c:if test="${not empty param.apiKey}">
     <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
-   <%-- <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/npo-api/authentication.js"></script>
     <script>
       var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');

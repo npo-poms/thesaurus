@@ -48,6 +48,8 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var deferred = $q.defer();
 
         clearTimeout(timeout);
+
+        // make sure these parameter are sorted alphabetically:
         var params =  {
             max: maxResults,
             schemes: schemes.map(function(a) {
@@ -59,12 +61,13 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var suggestionHeaders = {
             "x-origin": document.location.origin
         };
+        var path = "thesaurus/concepts/"
         if (typeof (npoAuthentication) !== 'undefined') {
-            npoAuthentication.addAuthorizationHeader(suggestionHeaders, "thesaurus/concepts/", params);
+            npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params);
         }
 
         timeout = setTimeout(function() {
-            $http.get('/v1/api/thesaurus/concepts/', {
+            $http.get('/v1/api/' + path, {
                 params: params,
                 headers: suggestionHeaders
             }).then(function (response) {
