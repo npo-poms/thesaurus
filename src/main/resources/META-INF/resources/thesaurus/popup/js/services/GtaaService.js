@@ -61,9 +61,9 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var suggestionHeaders = {
             "x-origin": document.location.origin
         };
-        var path = "thesaurus/concepts/"
+        var path = "thesaurus/concepts/";
         if (typeof (npoAuthentication) !== 'undefined') {
-            npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params);
+            npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params, true);
         }
 
         timeout = setTimeout(function() {
