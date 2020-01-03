@@ -1,8 +1,8 @@
 = thesaurus
+:toc:
 
 image:https://img.shields.io/nexus/s/https/oss.sonatype.org/nl.vpro.poms/poms-thesaurus.svg[snapshots,link=https://oss.sonatype.org/content/repositories/staging/nl/vpro/poms/poms-thesaurus/]
 
-:toc:
 
 == Thesaurus popup
 
