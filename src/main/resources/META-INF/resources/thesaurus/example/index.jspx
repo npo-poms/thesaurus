@@ -92,10 +92,9 @@
             Als je de popup 'read only' gebruikt dan geef je geen JWT-string mee. Je kunt dan alleen zoeken en selecteren, maar geen nieuwe concepten voorstellen bij B&amp;G.
           </p>
           <p id="loginlink">
-                Je bent niet ingelogd. De thesaurus is dus altijd ready only.
-                <a
-                   href="${pageContext.request.contextPath}/thesaurus/example/secure">log nu in</a>
-
+            Je bent niet ingelogd. De thesaurus is dus altijd ready only.
+            <a
+              href="${pageContext.request.contextPath}/thesaurus/example/secure">log nu in</a>
           </p>
         </div>
       </div>

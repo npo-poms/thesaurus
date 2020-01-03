@@ -49,6 +49,11 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
         clearTimeout(timeout);
 
+        headers = {};
+        if (typeof(npoAuthentication) !== 'undefined') {
+            npoAuthentication.addAuthorizationHeader(headers, "/v1/api/thesaurus/concepts/");
+        }
+
         timeout = setTimeout(function() {
             $http.get('/v1/api/thesaurus/concepts/', {
                 params: {
@@ -57,7 +62,8 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
                         return a.name;
                     }),
                     max: maxResults
-                }
+                },
+                headers: headers
             }).then(function (response) {
                     var items = response.data.items;
 
