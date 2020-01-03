@@ -7,63 +7,75 @@ var NpoApiAuthentication = function( apiKey, apiSecret, apiVersion) {
 
 NpoApiAuthentication.prototype = {
     // private methods
-    _getCredentials: function (headers, resourcePath) {
+    _getCredentials: function (headers, resourcePath, params) {
         var location = document.location;
-        var origin = location.origin || (location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')); //IE :(
+        origin = params['x-origin'] || (location.origin || (location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : ''))); //IE :(
         var data = 'origin:' + origin;
-
-        ['x-npo-date', 'x-npo-mid', 'x-npo-url'].forEach(function (header) {
-            if (header in headers) {
-                data += ',' + header.toLowerCase() + ':' + headers[header];
-            }
-        });
+        if (! headers[ 'x-npo-date' ]) {
+            headers['x-npo-date'] = new Date().toUTCString();
+        }
+        data += ',x-npo-date:' + headers['x-npo-date'];
 
         if (resourcePath) {
             data += ',uri:/' + this.api_version + '/api/';
             data += resourcePath.split('?')[0];
-            data += this._getParameters(resourcePath);
+            data += this._getParametersForEncode(resourcePath, params);
         }
 
-        //        return CryptoJS.HmacSHA256(data, this.apiSecret).toString(CryptoJS.enc.Base64);
-        btoa(CryptoJS.HmacSHA256(data, this.apiSecret));
+        var base64 = CryptoJS.HmacSHA256(data, this.apiSecret).toString(CryptoJS.enc.Base64);
+        //var base64 =  btoa(CryptoJS.HmacSHA256(data, this.apiSecret));
+        console.log("encoding with ", data, this.apiSecret, base64);
+        return base64;
     },
 
-    _getParameters: function (resourcePath) {
-        var result = '';
-        var hash = {};
-        var hashKeys = [];
+    _getParametersForEncode: function (resourcePath, params) {
+        params = params || this._getParametersFromResourcePath(resourcePath);
+        var sorted = this._getSortedParameters(params);
+        var result = "";
+        sorted.forEach(function(s) {
+            result += ',' + s.key + ':' + s.value;
+        });
+        return result;
+    },
+    _getParametersFromResourcePath: function (resourcePath) {
         var questionMark = resourcePath.indexOf('?');
-
+        var hash = {};
         if (questionMark >= 0) {
-
             var params = resourcePath.substring(questionMark + 1).split('&');
             var paramLength = params.length;
 
             for (var i = 0; i < paramLength; i++) {
                 var param = params[i].split('=');
                 hash[param[0]] = param[1];
-                hashKeys.push(param[0]);
-            }
-
-            hashKeys = hashKeys.sort();
-
-            var hashKeyLength = hashKeys.length;
-
-            for (var j = 0; j < hashKeyLength; j++) {
-                if (hashKeys[j] !== 'iecomp') {
-                    result += ',' + hashKeys[j] + ':' + hash[hashKeys[j]];
-                }
             }
         }
-
+        return hash;
+    },
+    _getSortedParameters: function (params) {
+        var ordered = [];
+        Object.keys(params).sort().forEach(function(key) {
+            ordered.push({ 'key': key, 'value': params[key]});
+        });
+        return ordered;
+    },
+    getQueryParameters: function(params) {
+        var sorted = this._getSortedParameters(params);
+        var result = "";
+        var sep = '?';
+        sorted.forEach(function(s) {
+            result += sep + s.key + '=' + encodeURIComponent(s.value);
+            sep = '&';
+        });
         return result;
+
     },
 
-    addAuthorizationHeader: function (headers, resourcePath) {
-        headers['Authorization'] = this.getAuthorizationHeader(headers, resourcePath);
+    addAuthorizationHeader: function (headers, resourcePath, params) {
+        headers['Authorization'] = this.getAuthorizationHeader(headers, resourcePath, params);
     },
 
-    getAuthorizationHeader: function (headers, resourcePath) {
-        return 'NPO ' + this.apiKey + ": " + this._getCredentials(headers, resourcePath);
+    getAuthorizationHeader: function (headers, resourcePath, params) {
+        var header =  'NPO ' + this.apiKey + ":" + this._getCredentials(headers, resourcePath, params);
+        return header;
     }
 };

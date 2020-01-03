@@ -48,22 +48,25 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var deferred = $q.defer();
 
         clearTimeout(timeout);
+        var params =  {
+            max: maxResults,
+            schemes: schemes.map(function(a) {
+                return a.name;
+            }),
 
-        headers = {};
-        if (typeof(npoAuthentication) !== 'undefined') {
-            npoAuthentication.addAuthorizationHeader(headers, "/v1/api/thesaurus/concepts/");
+            text: text
+        };
+        var suggestionHeaders = {
+            "x-origin": document.location.origin
+        };
+        if (typeof (npoAuthentication) !== 'undefined') {
+            npoAuthentication.addAuthorizationHeader(suggestionHeaders, "thesaurus/concepts/", params);
         }
 
         timeout = setTimeout(function() {
             $http.get('/v1/api/thesaurus/concepts/', {
-                params: {
-                    text: text,
-                    schemes: schemes.map(function(a) {
-                        return a.name;
-                    }),
-                    max: maxResults
-                },
-                headers: headers
+                params: params,
+                headers: suggestionHeaders
             }).then(function (response) {
                     var items = response.data.items;
 
@@ -82,7 +85,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
                 function (error) {
                     deferred.reject(error);
                 });
-        }, 300);
+        }.bind(this), 300);
 
         return deferred.promise;
     };
