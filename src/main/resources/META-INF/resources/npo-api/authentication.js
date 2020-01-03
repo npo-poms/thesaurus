@@ -1,3 +1,10 @@
+/**
+ * See https://github.com/npo-poms/thesaurus/blob/master/README.adoc#npo-api-authentication
+ * @param {String} apiKey
+ * @param {String} apiSecret
+ * @param {String} apiVersion defaults to v1
+ * @constructor
+ */
 
 var NpoApiAuthentication = function( apiKey, apiSecret, apiVersion) {
     this.api_version = apiVersion || 'v1';
