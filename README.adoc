@@ -1,0 +1,48 @@
+= thesaurus
+:toc:
+
+image:https://img.shields.io/nexus/s/https/oss.sonatype.org/nl.vpro.poms/poms-thesaurus.svg[snapshots,link=https://oss.sonatype.org/content/repositories/staging/nl/vpro/poms/poms-thesaurus/]
+
+
+== Thesaurus popup
+
+=== Example
+
+source code of the thesaurus frontend deployed in the NPO API.
+
+This is deployed https://rs-dev.poms.omroep.nl/v1/thesaurus/example[here]
+
+== NPO API authentication
+
+
+This is used as follows
+
+In your `<head>`
+
+```html
+  <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+  <script src="https://rs.dev.poms.omroep.nl/npo-api/authentication.js"></script>
+  <script>
+      var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
+  </script>
+```
+And then in javascript:
+```js
+
+ // make sure these parameter are sorted alphabetically:
+  var params =  {
+     max: maxResults,
+     schemes: 'names',
+      text: text
+   };
+   var suggestionHeaders = {
+      "x-origin": document.location.origin
+   };
+   var path = "thesaurus/concepts/"
+   npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params);
+   $http.get('/v1/api/' + path, {
+     params: params,
+     headers: suggestionHeaders
+    }).then(function (response) {
+ ...
+```

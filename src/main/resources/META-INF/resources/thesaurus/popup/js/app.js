@@ -27,9 +27,9 @@ gtaaApp.directive('typeaheadFocus', function () {
     };
 });
 
-gtaaApp.directive('gtaaPersonForm', function () {
+gtaaApp.directive('gtaaCreditableForm', function () {
     return {
-        templateUrl : serverInfo.ctx + '/thesaurus/popup/templates/form/display/person.html'
+        templateUrl : serverInfo.ctx + '/thesaurus/popup/templates/form/display/creditable.html'
     };
 });
 

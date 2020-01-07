@@ -4,10 +4,9 @@
   import="nl.vpro.util.PropertiesUtil,nl.vpro.thesaurus.Utils"
   pageEncoding="UTF-8"
   session="false"
-%>
-<%@ page import="java.util.Objects" %>
-<%@ page import="org.springframework.web.context.ContextLoader" %>
-<%@taglib
+%><%@ page import="java.util.Objects"
+%><%@ page import="org.springframework.web.context.ContextLoader"
+%><%@taglib
   prefix="c" uri="http://java.sun.com/jsp/jstl/core"
 %><%
   request.setAttribute("properties",
@@ -16,6 +15,7 @@
   response.setHeader("Cache-Control", "max-age=3600");
 %><head>
   <title>GTAA</title>
+
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
   <link rel="stylesheet" href="./popup.css"/>
@@ -23,12 +23,13 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
   <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.8/select.js"></script>
+
   <script>
       <%-- Communicate some stuff known by the server to javascript --%>
       var serverInfo = {
           ctx: "${pageContext.request.contextPath}",
           geoRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.GeoRoleType.class) %>,
-          personRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.RoleType.class) %>,
+          creditRoles: <%=Utils.buildJsonArray(nl.vpro.domain.media.RoleType.class) %>,
           gtaaSchemes: <%=Utils.buildJsonObject(nl.vpro.domain.gtaa.Scheme.class) %>
       }
   </script>
@@ -44,6 +45,15 @@
   </c:choose>
   <meta name="personUpdateService"  content="${requestScope.properties['npo_pageupdate_api.baseUrl']}/api/thesaurus/person"/>
   <meta name="conceptUpdateService" content="${requestScope.properties['npo_pageupdate_api.baseUrl']}/api/thesaurus/concept"/>
+  <c:if test="${not empty param.apiKey}">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="${pageContext.request.contextPath}/npo-api/authentication.js"></script>
+    <script>
+      var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
+    </script>
+  </c:if>
+
+
 
 </head>
 <body  ng-app="gtaaApp" ng-controller="GtaaConceptController" class="{{waiting ? 'waiting' :''}}">
@@ -92,8 +102,8 @@
         <hr />
         <div ng-if="!registerNewConcept && concept.id">
           <gtaa-geographicname-form ng-if="isGeographicName(concept)"></gtaa-geographicname-form>
-          <gtaa-person-form ng-if="isPerson(concept)"></gtaa-person-form>
-          <gtaa-concept-form ng-if="!isPerson(concept) && !isGeographicName(concept)"></gtaa-concept-form>
+          <gtaa-creditable-form ng-if="isCreditable(concept)"></gtaa-creditable-form>
+          <gtaa-concept-form ng-if="!isCreditable(concept) && !isGeographicName(concept)"></gtaa-concept-form>
         </div>
         <gtaa-register-form ng-if="registerNewConcept"></gtaa-register-form>
 

@@ -3,7 +3,10 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
     document.querySelector('#searchValue').focus();
     this.submitConcept = function(concept, secret) {
         var deferred = $q.defer();
+
         var isPerson = concept.objectType === 'person';
+        var isCreditable = isPerson || concept.objectType === 'name';
+
         var newConcept = {
             objectType: concept.objectType,
             scopeNotes: concept.scopeNotes
@@ -46,15 +49,27 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
         clearTimeout(timeout);
 
+        // make sure these parameter are sorted alphabetically:
+        var params =  {
+            max: maxResults,
+            schemes: schemes.map(function(a) {
+                return a.name;
+            }),
+
+            text: text
+        };
+        var suggestionHeaders = {
+            "x-origin": document.location.origin
+        };
+        var path = "thesaurus/concepts/";
+        if (typeof (npoAuthentication) !== 'undefined') {
+            npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params, true);
+        }
+
         timeout = setTimeout(function() {
-            $http.get('/v1/api/thesaurus/concepts/', {
-                params: {
-                    text: text,
-                    schemes: schemes.map(function(a) {
-                        return a.name;
-                    }),
-                    max: maxResults
-                }
+            $http.get('/v1/api/' + path, {
+                params: params,
+                headers: suggestionHeaders
             }).then(function (response) {
                     var items = response.data.items;
 
@@ -73,7 +88,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
                 function (error) {
                     deferred.reject(error);
                 });
-        }, 300);
+        }.bind(this), 300);
 
         return deferred.promise;
     };

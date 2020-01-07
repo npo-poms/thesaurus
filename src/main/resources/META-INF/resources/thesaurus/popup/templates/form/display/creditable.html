@@ -1,19 +1,28 @@
 <div class="gtaa-rows-{{concept.objectType}}">
 
   <div class="row">
-    <div class="col-4 field">
+
+    <div class="col-4 field" ng-if="concept.objectType == 'person'">
       <label label-for="givenName">Voornaam:</label>
       <input id="givenName"
              ng-disabled="true"
              type="text" ng-model="concept.givenName"/>
     </div>
+    <div class="col-4 field" ng-if="concept.objectType != 'person'">
+      <label label-for="givenName">Naam:</label>
+      <input id="name"
+             ng-disabled="true"
+             type="text" ng-model="concept.name"/>
+    </div>
 
     <div class="col-4 field">
+      <span  ng-if="concept.objectType == 'person'">
       <label label-for="familyName">Achternaam: </label>
       <input id="familyName"
              ng-disabled="true"
              type="text" ng-model="concept.familyName"/>
       <br/>
+      </span>
       <label label-for="type">As: </label>
       <input id="type"
              ng-disabled="true"
@@ -39,7 +48,7 @@
     <div class="col-8 field">
       <label label-for="role">Role: </label>
       <select id="role"
-              ng-options="item as item.label for item in personRoles track by item.name"
+              ng-options="item as item.pluralLabel for item in creditRoles track by item.name"
               ng-model="concept.$role"></select>
     </div>
   </div>
