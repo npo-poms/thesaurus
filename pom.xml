@@ -23,7 +23,7 @@
     <connection>scm:git:git://git@github.com/npo-poms/thesaurus.git</connection>
     <developerConnection>scm:git:git@github.com:npo-poms/thesaurus.git</developerConnection>
     <url>https://github.com/npo-poms/thesaurus</url>
-    <tag>HEAD</tag>
+    <tag>REL-5.12-SNAPSHOT</tag>
   </scm>
 
   <build>
