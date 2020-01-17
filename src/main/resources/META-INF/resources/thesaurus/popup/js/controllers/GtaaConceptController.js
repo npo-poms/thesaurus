@@ -290,7 +290,9 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     };
 
     $scope.onSelect = function(item, model) {
-        $scope.concept = {};
+        $scope.concept = {
+            $searchValue: item.name
+        };
         //$scope.concept = Object.assign($scope.concept, model);  doesn't work in IE
         $scope.concept = angular.extend($scope.concept, model);
         if(model.$create) {
