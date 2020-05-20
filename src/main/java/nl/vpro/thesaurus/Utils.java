@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.gtaa.Scheme;
-import nl.vpro.util.PropertiesUtil;
+import nl.vpro.configuration.spring.PropertiesUtil;
 
 /**
  *

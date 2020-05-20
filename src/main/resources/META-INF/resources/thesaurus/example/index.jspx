@@ -9,7 +9,7 @@
   <jsp:directive.page import="java.util.Arrays"/>
   <jsp:directive.page import="nl.vpro.domain.gtaa.Scheme"/>
   <jsp:directive.page import="nl.vpro.thesaurus.Utils"/>
-  <jsp:directive.page import="nl.vpro.util.PropertiesUtil"/>
+  <jsp:directive.page import="nl.vpro.configuration.spring.PropertiesUtil"/>
   <jsp:directive.page import="java.time.Instant"/>
   <jsp:directive.page import="java.time.Duration"/>
   <jsp:scriptlet>

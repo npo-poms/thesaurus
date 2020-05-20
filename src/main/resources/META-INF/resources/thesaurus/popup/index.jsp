@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="nl">
 <%@page
-  import="nl.vpro.util.PropertiesUtil,nl.vpro.thesaurus.Utils"
+  import="nl.vpro.configuration.spring.PropertiesUtil,nl.vpro.thesaurus.Utils"
   pageEncoding="UTF-8"
   session="false"
 %><%@ page import="java.util.Objects"
