@@ -5,11 +5,11 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.13.0</version>
+    <version>5.30.2</version>
   </parent>
 
   <name>poms thesaurus</name>
-  <version>5.14-SNAPSHOT</version>
+  <version>5.30-SNAPSHOT</version>
   <artifactId>poms-thesaurus</artifactId>
 
   <description>Thesaurus</description>
@@ -74,12 +74,12 @@
         <repository>
           <id>nexus</id>
           <name>Nexus releases</name>
-          <url>http://nexus.vpro.nl/content/repositories/releases</url>
+          <url>https://nexus.vpro.nl/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
           <id>nexus</id>
           <name>Nexus snapshots</name>
-          <url>http://nexus.vpro.nl/content/repositories/snapshots</url>
+          <url>https://nexus.vpro.nl/content/repositories/snapshots</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>

@@ -1,0 +1,37 @@
+name: build
+
+on:
+  push:
+    branches: [ master, "REL-*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: 8
+    - uses: s4u/maven-settings-action@v2
+      with:
+        servers: '[{"id": "vpro-ossrh", "username": "vpro", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'
+    - uses: crazy-max/ghaction-import-gpg@v3
+      with:
+        gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+        passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - name: Build with Maven
+      run: mvn -B -Pdeploy,ossrh -U deploy
+
+
+
