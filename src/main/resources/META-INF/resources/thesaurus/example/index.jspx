@@ -158,7 +158,7 @@
       </div>
     </form>
     <p>De implementatie van deze pagina vind je <a
-        href="https://github.com/npo-poms/thesaurus/tree/master/src/main/resources/META-INF/resources/thesaurus/example">hier</a>
+        href="https://github.com/npo-poms/thesaurus/tree/main/src/main/resources/META-INF/resources/thesaurus/example">hier</a>
     </p>
   </div>
   <div id="modal" class="modal">

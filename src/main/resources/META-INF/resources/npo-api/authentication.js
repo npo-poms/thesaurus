@@ -1,5 +1,5 @@
 /**
- * See https://github.com/npo-poms/thesaurus/blob/master/README.adoc#npo-api-authentication
+ * See https://github.com/npo-poms/thesaurus/blob/main/README.adoc#npo-api-authentication
  * @param {String} apiKey
  * @param {String} apiSecret
  * @param {String} apiVersion defaults to v1
