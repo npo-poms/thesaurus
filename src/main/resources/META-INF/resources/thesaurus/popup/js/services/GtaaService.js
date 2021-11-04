@@ -75,8 +75,20 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
                     if ($location.search().jwt) {
                         // This is a stupid hack!!
+                        familyName = null;
+                        givenName = null;
+                        if (text) {
+                            split = text.split(/,(.+)/); // split on first comma
+                            familyName = split[0];
+                            if (split.length > 1) {
+                                givenName = split[1];
+                            }
+
+                        }
                         items.push({
                             name: text,
+                            givenName: givenName,
+                            familyName: familyName,
                             status: 'create',
                             scopeNotes: [''],
                             $create: true,
