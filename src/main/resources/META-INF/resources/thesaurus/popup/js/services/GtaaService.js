@@ -8,7 +8,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var isCreditable = isPerson || concept.objectType === 'name';
 
         var newConcept = {
-            objectType: concept.objectType,
+            newObjectType: concept.objectType,
             scopeNotes: concept.scopeNotes
         };
         var neededService;
