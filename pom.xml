@@ -19,9 +19,9 @@
   </properties>
 
 
-   <scm>
-    <connection>scm:git:git://git@github.com/npo-poms/thesaurus.git</connection>
-    <developerConnection>scm:git:git@github.com:npo-poms/thesaurus.git</developerConnection>
+  <scm>
+    <connection>scm:git:${project.scm.url}</connection>
+    <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <url>https://github.com/npo-poms/thesaurus</url>
     <tag>HEAD</tag>
   </scm>
