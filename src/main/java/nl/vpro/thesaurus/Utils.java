@@ -58,7 +58,9 @@ public class Utils implements ApplicationContextAware {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof Principal) {
             String authentication = ((Principal) principal).getName();
-            return jws(subject, authentication, properties.getMap().get("gtaa.example.issuer"), expiration);
+            String issuer = properties.getMap().get("gtaa.example.issuer");
+            log.debug("Issuer {}", issuer);
+            return jws(subject, authentication, issuer, expiration);
         } else {
             String authentication = principal.toString();
             log.debug("No valid authentication found {}", authentication);
