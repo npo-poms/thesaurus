@@ -73,8 +73,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
      * This fixes that, and makes a clean json object which separates the several concepts needed.
      */
 
-    conceptToMessage = function(webformAction) {
-        $scope.resolveScheme($scope.concept);
+    conceptToMessage = function(webformAction, forNew) {
+        $scope.resolveScheme($scope.concept, forNew);
         // make a copy because angular (and we too) pollutes the object
         var message = {
             action: webformAction,
@@ -111,7 +111,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
      * @param webformAction either 'selected' or 'canceled'
      */
     function sendBack(webformAction) {
-        var message = conceptToMessage(webformAction);
+        var message = conceptToMessage(webformAction, false);
         console.log("sending back ", message);
 
         var callbackService = $location.search().callbackService;
@@ -214,7 +214,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     };
 
     $scope.register = function() {
-        var message = conceptToMessage();
+        var message = conceptToMessage(null, true);
         var concept = message.concept;
         console.log("registering ", message);
 
@@ -361,10 +361,14 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
         return result;
     };
 
-    $scope.resolveScheme = function(concept) {
+    $scope.resolveScheme = function(concept, forNew) {
         if (concept.$scheme) {
             // this is a hack
-            concept.objectType = concept.$scheme.objectType;
+            if (forNew) {
+                concept.newObjectType = concept.$scheme.objectType;
+            } else {
+                concept.objectType = concept.$scheme.objectType;
+            }
         }
     };
 
