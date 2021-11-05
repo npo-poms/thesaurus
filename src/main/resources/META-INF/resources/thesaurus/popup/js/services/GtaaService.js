@@ -5,7 +5,6 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         var deferred = $q.defer();
 
         var isPerson = concept.objectType === 'person';
-        var isCreditable = isPerson || concept.objectType === 'name';
 
         var newConcept = {
             //newObjectType: isPerson ? "person" : "concept", // is arranged by JsonIdAdderBodyReader
@@ -75,26 +74,34 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
                     var items = response.data.items;
 
                     if ($location.search().jwt) {
-                        // This is a stupid hack!!
-                        familyName = null;
-                        givenName = null;
-                        if (text) {
+                        let json = {
+                            status: 'create',
+                            scopeNotes: [''],
+                            $create: true,
+                            $createMessage: "Als nieuw concept registreren (" + context.objectType + ")"
+                        }
+
+                        if (text && this.isPerson(this.concept)) {
+                            let familyName = null;
+                            let givenName = null;
                             split = text.split(/,(.+)/); // split on first comma
                             familyName = split[0];
                             if (split.length > 1) {
                                 givenName = split[1];
+                            } else {
+                                // try to split on space too
+                                split = text.split(/\s+(._)/);
+                                if (split.length > 1) {
+                                    givenName = split[0];
+                                    familyName = split[1];
+                                }
                             }
-
+                            json.familyName = familyName;
+                            json.givenName = givenName
+                        } else {
+                            json.name = text;
                         }
-                        items.push({
-                            name: text,
-                            givenName: givenName,
-                            familyName: familyName,
-                            status: 'create',
-                            scopeNotes: [''],
-                            $create: true,
-                            $createMessage: "Als nieuw concept registreren"
-                        });
+                        items.push(json);
                     }
                     deferred.resolve(items);
                 },

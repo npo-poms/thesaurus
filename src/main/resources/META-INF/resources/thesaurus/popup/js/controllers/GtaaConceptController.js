@@ -73,8 +73,8 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
      * This fixes that, and makes a clean json object which separates the several concepts needed.
      */
 
-    conceptToMessage = function(webformAction, forNew) {
-        $scope.resolveScheme($scope.concept, forNew);
+    conceptToMessage = function(webformAction) {
+        $scope.resolveScheme($scope.concept);
         // make a copy because angular (and we too) pollutes the object
         var message = {
             action: webformAction,
@@ -361,14 +361,10 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
         return result;
     };
 
-    $scope.resolveScheme = function(concept, forNew) {
+    $scope.resolveScheme = function(concept) {
         if (concept.$scheme) {
             // this is a hack
-            if (forNew) {
-                concept.newObjectType = concept.$scheme.objectType;
-            } else {
-                concept.objectType = concept.$scheme.objectType;
-            }
+            concept.objectType = concept.$scheme.objectType;
         }
     };
 
