@@ -111,7 +111,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
      * @param webformAction either 'selected' or 'canceled'
      */
     function sendBack(webformAction) {
-        var message = conceptToMessage(webformAction);
+        var message = conceptToMessage(webformAction, false);
         console.log("sending back ", message);
 
         var callbackService = $location.search().callbackService;
@@ -214,7 +214,7 @@ gtaaApp.controller('GtaaConceptController', function($scope, $http, $location, $
     };
 
     $scope.register = function() {
-        var message = conceptToMessage();
+        var message = conceptToMessage(null, true);
         var concept = message.concept;
         console.log("registering ", message);
 
