@@ -20,7 +20,7 @@ In your `<head>`
 
 ```html
   <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
-  <script src="https://rs.poms.omroep.nl/npo-api/authentication.js"></script>
+  <script src="https://rs.poms.omroep.nl/v1/npo-api/authentication.js"></script>
   <script>
       var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
   </script>
