@@ -20,9 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.configuration.spring.PropertiesUtil;
+import nl.vpro.domain.gtaa.Scheme;
+import nl.vpro.i18n.Displayable;
 
 /**
  *
