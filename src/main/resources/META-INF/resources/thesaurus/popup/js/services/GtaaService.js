@@ -2,16 +2,16 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
     document.querySelector('#searchValue').focus();
     this.submitConcept = function(concept, secret) {
-        var deferred = $q.defer();
+        const deferred = $q.defer();
 
-        var isPerson = concept.objectType === 'person';
+        const isPerson = concept.objectType === 'person';
 
-        var newConcept = {
+        const newConcept = {
             //newObjectType: isPerson ? "person" : "concept", // is arranged by JsonIdAdderBodyReader
             objectType: concept.objectType,
             scopeNotes: concept.scopeNotes
         };
-        var neededService;
+        let neededService;
         if (isPerson) {
             newConcept.givenName = concept.givenName;
             newConcept.familyName = concept.familyName;
@@ -21,7 +21,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
             neededService = 'conceptUpdateService';
         }
 
-        var req = {
+        const req = {
             method: 'POST',
             url: document.querySelector("meta[name=" + neededService + "]").getAttribute("content"),
             headers: {
@@ -42,15 +42,15 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
     };
 
-    var timeout = null;
+    let timeout = null;
     this.suggestions = function( text, maxResults, schemes) {
 
-        var deferred = $q.defer();
+        const deferred = $q.defer();
 
         clearTimeout(timeout);
 
         // make sure these parameter are sorted alphabetically:
-        var params =  {
+        const params =  {
             max: maxResults,
             schemes: schemes.map(function(a) {
                 return a.name;
@@ -58,14 +58,14 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
             text: text
         };
-        var suggestionHeaders = {
+        const suggestionHeaders = {
             "x-origin": document.location.origin
         };
-        var path = "thesaurus/concepts/";
+        const path = "thesaurus/concepts/";
         if (typeof (npoAuthentication) !== 'undefined') {
             npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params, true);
         }
-        let jsonForNew = {
+        const jsonForNew = {
             status: 'create',
             scopeNotes: [''],
             $create: true,
@@ -74,7 +74,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         }
 
         if (text && params.schemes.length === 1 && params.schemes[0] === "person") {
-            let familyName = null;
+            let familyName;
             let givenName = null;
             let split = text.split(/,(.+)/); // split on first comma
             familyName = split[0];
@@ -119,10 +119,10 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
                 id: id
             }
         }).then(function (response) {
-            var data = response.data;
+            const data = response.data;
             //console.log("get", data)
             //some messages are not concept objects.
-            if (validPerson(data)) {
+            if (this.validPerson(data)) {
                 $scope.concept.$searchValue = data.name;
             }
         });
