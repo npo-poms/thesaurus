@@ -65,43 +65,43 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         if (typeof (npoAuthentication) !== 'undefined') {
             npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params, true);
         }
+        let jsonForNew = {
+            status: 'create',
+            scopeNotes: [''],
+            $create: true,
+            //$createMessage: "Als nieuw concept registreren (" + this.concept.objectType + ")"
+            $createMessage: "Als nieuw concept registreren"
+        }
+
+        if (text && params.schemes.length === 1 && params.schemes[0] === "person") {
+            let familyName = null;
+            let givenName = null;
+            let split = text.split(/,(.+)/); // split on first comma
+            familyName = split[0];
+            if (split.length > 1) {
+                givenName = split[1];
+            } else {
+                // try to split on space too
+                split = text.split(/\s+(._)/);
+                if (split.length > 1) {
+                    givenName = split[0];
+                    familyName = split[1];
+                }
+            }
+            jsonForNew.familyName = familyName;
+            jsonForNew.givenName = givenName
+        } else {
+            jsonForNew.name = text;
+        }
 
         timeout = setTimeout(function() {
             $http.get('/v1/api/' + path, {
                 params: params,
                 headers: suggestionHeaders
             }).then(function (response) {
-                    var items = response.data.items;
-
+                    let items = response.data.items;
                     if ($location.search().jwt) {
-                        let json = {
-                            status: 'create',
-                            scopeNotes: [''],
-                            $create: true,
-                            $createMessage: "Als nieuw concept registreren (" + context.objectType + ")"
-                        }
-
-                        if (text && this.isPerson(this.concept)) {
-                            let familyName = null;
-                            let givenName = null;
-                            split = text.split(/,(.+)/); // split on first comma
-                            familyName = split[0];
-                            if (split.length > 1) {
-                                givenName = split[1];
-                            } else {
-                                // try to split on space too
-                                split = text.split(/\s+(._)/);
-                                if (split.length > 1) {
-                                    givenName = split[0];
-                                    familyName = split[1];
-                                }
-                            }
-                            json.familyName = familyName;
-                            json.givenName = givenName
-                        } else {
-                            json.name = text;
-                        }
-                        items.push(json);
+                        items.push(jsonForNew);
                     }
                     deferred.resolve(items);
                 },
