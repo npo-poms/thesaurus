@@ -69,7 +69,7 @@ public class Utils implements ApplicationContextAware {
     }
 
     /**
-     * Represents an enum as a json array of objects, where each each map entry at least contains a 'name' (the name of the enum) key and a 'label' (defaults to its {@link Object#toString()} value) but it
+     * Represents an enum as a json array of objects, where each map entry at least contains a 'name' (the name of the enum) key and a 'label' (defaults to its {@link Object#toString()} value) but it
      * can contain more values depending on which enum it actually is (it e.g. may implement {@link Displayable}, and may also have
      * a 'pluralLabel')).
      * @param enumClass The class of the enum to represent all possible values of.

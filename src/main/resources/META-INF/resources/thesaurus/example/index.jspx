@@ -13,7 +13,7 @@
   <jsp:directive.page import="java.time.Instant"/>
   <jsp:directive.page import="java.time.Duration"/>
   <jsp:scriptlet>
-    //We didnt set up MVC or so.
+    //We didn't set up MVC or so.
     // We only need very simply access to properties, and to jws-calculation.
     PropertiesUtil propertiesUtil = ((PropertiesUtil) org.springframework.web.context.ContextLoader.getCurrentWebApplicationContext().getBean("properties"));
     request.setAttribute("properties", propertiesUtil.getMap());
@@ -28,7 +28,10 @@
     <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-    <script src="//code.jquery.com/jquery-3.4.1.min.js" type="application/javascript">
+		<script src="//code.jquery.com/jquery-3.6.1.min.js"
+						integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+						crossorigin="anonymous"
+						type="application/javascript">
       <jsp:text></jsp:text>
     </script>
     <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">

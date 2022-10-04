@@ -4,14 +4,14 @@
 image:https://img.shields.io/nexus/s/https/oss.sonatype.org/nl.vpro.poms/poms-thesaurus.svg[snapshots,link=https://oss.sonatype.org/content/repositories/snapshots/nl/vpro/poms/poms-thesaurus/]
 image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-thesaurus.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:nl.vpro.poms%20AND%20a:poms-thesaurus]
 
- 
+
 == Thesaurus popup
 
 === Example
 
 source code of the thesaurus frontend deployed in the NPO API.
 
-This is deployed https://rs-dev.poms.omroep.nl/v1/thesaurus/example[here]
+This is deployed https://rs-test.poms.omroep.nl/v1/thesaurus/example[here]
 
 == NPO API authentication
 
@@ -21,7 +21,7 @@ This is used as follows
 In your `<head>`
 
 ```html
-  <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://rs.poms.omroep.nl/v1/npo-api/authentication.js"></script>
   <script>
       var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
@@ -34,7 +34,7 @@ And then in javascript:
   var params =  {
      max: maxResults,
      schemes: 'names',
-      text: text
+     text: text
    };
    var suggestionHeaders = {
       "x-origin": document.location.origin

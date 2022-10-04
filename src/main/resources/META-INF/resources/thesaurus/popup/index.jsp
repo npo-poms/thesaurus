@@ -47,7 +47,7 @@
   <meta name="conceptUpdateService" content="${requestScope.properties['npo_pageupdate_api.baseUrl']}/api/thesaurus/concept"/>
   <c:if test="${not empty param.apiKey}">
     <%-- This is not actually needed, for now the is no security on the /thesaurus end points --%>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="${pageContext.request.contextPath}/npo-api/authentication.js"></script>
     <script>
       var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
