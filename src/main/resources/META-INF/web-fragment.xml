@@ -5,7 +5,8 @@
               id="poms-thesaurus" version="3.0">
 
   <name>poms_thesaurus</name>
-
+  <display-name>Beeld en Geluid thesaurus integration</display-name>
+  <distributable />
   <servlet>
     <servlet-name>example-callback</servlet-name>
     <jsp-file>/thesaurus/example/callback/index.jsp</jsp-file>
