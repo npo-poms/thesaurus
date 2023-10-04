@@ -127,8 +127,7 @@ public class Utils implements ApplicationContextAware {
     static Map<String, String> toMap(@NonNull Enum<?> type) {
         Map<String, String> item = new HashMap<>();
         item.put("name", type.name());
-        if (type instanceof Displayable) {
-            Displayable displayable = (Displayable) type;
+        if (type instanceof Displayable displayable) {
             displayable.getPluralDisplayName().ifPresent((pluralLabel) ->
                 item.put("pluralLabel", pluralLabel.toString())
             );
