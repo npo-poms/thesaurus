@@ -8,6 +8,9 @@
 %><%@ page import="org.springframework.web.context.ContextLoader"
 %><%@taglib
   prefix="c" uri="http://java.sun.com/jsp/jstl/core"
+%><%@taglib
+  prefix="npo" uri="https://www.vpro.nl/shared/tags/npo"
+%><%
 %><%
   request.setAttribute("properties",
     ((PropertiesUtil) Objects.requireNonNull(ContextLoader.getCurrentWebApplicationContext()).getBean("properties"))
@@ -15,6 +18,8 @@
   response.setHeader("Cache-Control", "max-age=3600");
 %><head>
   <title>GTAA</title>
+
+	<npo:favicon />
 
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 				integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
