@@ -28,12 +28,10 @@
     <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-		<script src="//code.jquery.com/jquery-3.6.1.min.js"
-						integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-						crossorigin="anonymous"
-						type="application/javascript">
-      <jsp:text></jsp:text>
-    </script>
+		<script
+			src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+			integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+			crossorigin="anonymous"><jsp:text></jsp:text></script>
     <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>

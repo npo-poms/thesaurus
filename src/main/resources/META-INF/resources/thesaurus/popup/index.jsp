@@ -16,13 +16,27 @@
 %><head>
   <title>GTAA</title>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+				integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+				crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
   <link rel="stylesheet" href="./popup.css"/>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
-  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.8/select.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+					integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+					crossorigin="anonymous"
+					referrerpolicy="no-referrer"><jsp:text></jsp:text></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.3/angular-sanitize.min.js"
+					integrity="sha512-dqbRITjlgYAKHWHwL8fK7VPOsFc702ybywomtYLRcjOzBHM3WgEGN0SQQR6IJKY4ZiJiZkNguOAcFZmalk+2sA=="
+					crossorigin="anonymous"
+					referrerpolicy="no-referrer"><jsp:text></jsp:text></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap-tpls.min.js"
+					integrity="sha512-+qNXcNMBMY6Vx1oKJbdSsPsKS+bcB2yrprqb2jysz8bYC+vPJQsNBapHpq8zvf7oNGEhCgkFLKAsIeUXSkThHg=="
+					crossorigin="anonymous" referrerpolicy="no-referrer"><jsp:text></jsp:text></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.8/select.min.js"
+					integrity="sha512-IO99nu6TitXdydITTnjerPUo0HffdgLC9yIfv5gwglcsSR7nN008a7QDynI5Ih0mGLlnNnt8tGIuBCFRZaNjqw=="
+					crossorigin="anonymous" referrerpolicy="no-referrer"><jsp:text></jsp:text></script>
+
 
   <script>
       <%-- Communicate some stuff known by the server to javascript --%>
