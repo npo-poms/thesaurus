@@ -78,6 +78,12 @@ public class Utils implements ApplicationContextAware {
     public static String buildJsonArray(@NonNull Class<? extends Enum<?>>  enumClass) throws JsonProcessingException {
         List<Map<String, String>> result = new ArrayList<>();
         for (Enum<?> type : enumClass.getEnumConstants()) {
+            if (type instanceof Displayable displayable) {
+                if (! displayable.display()) {
+                    continue;
+                }
+
+            }
             result.add(
                 toMap(type)
             );
