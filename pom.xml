@@ -9,7 +9,7 @@
   </parent>
 
   <name>poms thesaurus</name>
-  <version>7.0.0-SNAPSHOT</version>
+  <version>7.0.0</version>
   <artifactId>poms-thesaurus</artifactId>
 
   <description>Thesaurus</description>
@@ -19,7 +19,7 @@
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <url>https://github.com/npo-poms/thesaurus</url>
-    <tag>REL-7.0-SNAPSHOT</tag>
+    <tag>REL-7.0.0</tag>
   </scm>
 
   <dependencies>
