@@ -38,8 +38,7 @@
     <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
+		<jsp:include page="/css/head.jspx" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/thesaurus/example/index.css"/>
     <meta name="jwt" content="${requestScope.jwt}"/>
     <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
