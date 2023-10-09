@@ -20,15 +20,18 @@ This is used as follows
 
 In your `<head>`
 
-```html
+[source,html]
+----
   <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://rs.poms.omroep.nl/v1/npo-api/authentication.js"></script>
   <script>
       var npoAuthentication = new NpoApiAuthentication('${param.apiKey}', '${param.apiSecret}');
   </script>
-```
+----
 And then in javascript:
-```js
+
+[source,js]
+----
 
  // make sure these parameter are sorted alphabetically:
   var params =  {
@@ -46,4 +49,4 @@ And then in javascript:
      headers: suggestionHeaders
     }).then(function (response) {
  ...
-```
+----
