@@ -26,7 +26,7 @@ import nl.vpro.i18n.Displayable;
 
 /**
  *
- * Utilities to write information from java to objects useable in javascript.
+ * Utilities to write information from java to objects usable in javascript.
  *
  * @author Michiel Meeuwissen
  * @since 5.10
