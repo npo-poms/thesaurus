@@ -38,7 +38,7 @@
     <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-    <jsp:include page="${pageContext.request.contextPath}/css/head.jspx" />
+    <jsp:include page="/css/head.jspx" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/thesaurus/example/index.css"/>
     <meta name="jwt" content="${requestScope.jwt}"/>
     <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
