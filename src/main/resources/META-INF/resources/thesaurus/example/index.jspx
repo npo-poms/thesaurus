@@ -67,7 +67,7 @@
           </select>
         </div>
         <p class="col-6">
-          Kies welke concepten je wilt zoeken (leeg laten is zoeken in alles)
+          <label for="schemes">Kies welke concepten je wilt zoeken (leeg laten is zoeken in alles)</label>
         </p>
       </div>
       <div class="row">
