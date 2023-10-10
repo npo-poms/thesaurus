@@ -1,7 +1,7 @@
 <jsp:root
     xmlns:jsp="http://java.sun.com/JSP/Page"
     version="2.0"
-		xmlns:npo="https://www.vpro.nl/shared/tags/npo"
+    xmlns:npo="https://www.vpro.nl/shared/tags/npo"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
   <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
   <jsp:output
@@ -26,19 +26,19 @@
   <html lang="nl">
   <head>
     <title>POMS GTAA</title>
-		<npo:favicon />
+    <npo:favicon />
 
     <script src="${pageContext.request.contextPath}/thesaurus/popup.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-		<script
-			src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-			integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
-			crossorigin="anonymous"><jsp:text></jsp:text></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"><jsp:text></jsp:text></script>
     <script src="${pageContext.request.contextPath}/thesaurus/example/index.js" type="application/javascript">
       <jsp:text></jsp:text>
     </script>
-		<jsp:include page="/css/head.jspx" />
+    <jsp:include page="/css/head.jspx" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/thesaurus/example/index.css"/>
     <meta name="jwt" content="${requestScope.jwt}"/>
     <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
@@ -72,7 +72,7 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <label for="id">Callback:</label>
+          <label for="callbackurl">Callback:</label>
           <input type="checkbox" id="usecallbackurl"/>
           <input type="text"
                  id="callbackurl"
@@ -86,7 +86,7 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <label for="id">Read only:</label>
+          <label for="readonly">Read only:</label>
           <input type="checkbox" id="readonly"/>
         </div>
         <div class="col-6">
@@ -129,7 +129,7 @@
 
         <div class="row role">
           <div class="col-6">
-            <label for="name">Rol:</label>
+            <label for="role">Rol:</label>
             <input type="text" id="role"/>
           </div>
            <p class="col-6">
