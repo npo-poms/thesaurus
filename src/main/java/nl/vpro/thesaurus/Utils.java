@@ -44,10 +44,10 @@ public class Utils implements ApplicationContextAware {
     }
 
     /**
-     * Given the subject, calculates a JWT-string for the currenly logged in user.
+     * Given the subject, calculates a JWT-string for the currently logged-in user.
      * @param subject Subject
      * @param expiration and expiration date neede for the jws
-     * @return The JWT-string, or an empty string if there is no currently logged in user.
+     * @return The JWT-string, or an empty string if there is no currently logged-in user.
      */
     public static String jws(@NonNull String subject, @NonNull Instant expiration) {
 
@@ -125,12 +125,12 @@ public class Utils implements ApplicationContextAware {
         SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes());
 
         return Jwts.builder()
-            .setSubject(subject)
+            .subject(subject)
             .claim("usr", jwsUser)
-            .setIssuedAt(Date.from(Instant.now()))
-            .setIssuer(jwsIssuer)
-            .setExpiration(Date.from(expires))
-            .signWith(secretKey, SignatureAlgorithm.HS256)
+            .issuedAt(Date.from(Instant.now()))
+            .issuer(jwsIssuer)
+            .expiration(Date.from(expires))
+            .signWith(secretKey, Jwts.SIG.HS256)
             .compact();
     }
 
