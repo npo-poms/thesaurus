@@ -7,7 +7,7 @@
 %><%@ page import="java.util.Objects"
 %><%@ page import="org.springframework.web.context.ContextLoader"
 %><%@taglib
-  prefix="c" uri="http://java.sun.com/jsp/jstl/core"
+  prefix="c" uri="jakarta.tags.core"
 %><%@taglib
   prefix="npo" uri="https://www.vpro.nl/shared/tags/npo"
 %><%
