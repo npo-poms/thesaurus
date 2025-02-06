@@ -50,7 +50,7 @@
       <h1>GTAA - Voorbeeld</h1>
       <p>
         <jsp:text>Binnen de GTAA thesaurus is het mogelijk om op verschillende assen naar naar termen te zoeken. De mogelijke assen zijn te vinden op </jsp:text>
-        <a href="https://labs.beeldengeluid.nl/datasets/gtaa">gtaa conceptSchemes</a>
+        <a href="https://data.beeldengeluid.nl/datasets/gtaa">gtaa conceptSchemes</a>
         <jsp:text> lijst.</jsp:text>
       </p>
       <p>Vul het volgend formulier (alle velden zijn optioneel) en druk op 'Open'.</p>
