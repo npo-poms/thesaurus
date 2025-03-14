@@ -79,6 +79,8 @@ var gtaa = {
                 console && console.log(e);
             }
         };
+        let iframehack;
+
         function close(){
             if (popup) {
                 popup.close();
@@ -96,7 +98,6 @@ var gtaa = {
             const iframe = document.getElementById(iframeId);
             iframe.src = popupUrl;
         } else { //open popup
-            let iframehack;
             if (document.all) {
                 // some hackery to help IE, because in IE you may not post to other window, only from an iframe.
                 iframehack = document.createElement('iframe');
