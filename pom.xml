@@ -83,6 +83,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <!-- we don't use it but parents surefire plugin seems to be configured to do -->
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
