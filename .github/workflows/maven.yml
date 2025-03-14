@@ -11,14 +11,14 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+       MAVEN_ARGS: '--no-transfer-progress'
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 17
+        java-version: 21
         server-id: vpro-ossrh
         server-username: SONATYPE_USERNAME
         server-password: SONATYPE_PASSWORD
