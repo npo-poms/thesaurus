@@ -1,7 +1,6 @@
 package nl.vpro.thesaurus;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,8 +56,13 @@ public class Utils implements ApplicationContextAware {
             throw new RuntimeException("No properties found on application context");
         }
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof Principal) {
-            String authentication = ((Principal) principal).getName();
+         if (principal instanceof Principal springPrincipal) {
+             String authentication = springPrincipal.getName();
+             String issuer = properties.getMap().get("gtaa.example.issuer");
+             log.debug("Issuer {}", issuer);
+             return jws(subject, authentication, issuer, expiration);
+         } else if (principal instanceof OAuth2User oAuth2User) {
+            String authentication = oAuth2User.getAttribute("email");
             String issuer = properties.getMap().get("gtaa.example.issuer");
             log.debug("Issuer {}", issuer);
             return jws(subject, authentication, issuer, expiration);

@@ -1,15 +1,15 @@
  $(document).ready(function () {
-     var concept = $("#concept");
-     var person  = $("#person");
-     var role    = $("#role");
-     var postmessage = $(".postmessage");
-     var httppost    = $(".httppost");
-     var callback = $("#callbackurl");
-     var schemes = $("#schemes");
-     var readonly = $("#readonly");
+     const concept = $("#concept");
+     const person  = $("#person");
+     const role    = $("#role");
+     const postmessage = $(".postmessage");
+     const httppost    = $(".httppost");
+     const callback = $("#callbackurl");
+     const schemes = $("#schemes");
+     const readonly = $("#readonly");
 
-     var jwt =  $("meta[name=jwt]").attr("content");
-     var mustBeReadOnly = jwt === '';
+     const jwt =  $("meta[name=jwt]").attr("content");
+     const mustBeReadOnly = jwt === '';
      if (mustBeReadOnly) {
          readonly.prop("checked", true);
          readonly.prop("readonly", "readonly");
