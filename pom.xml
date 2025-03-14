@@ -9,7 +9,7 @@
   </parent>
 
   <name>poms thesaurus</name>
-  <version>8.5-SNAPSHOT</version>
+  <version>8.6-SNAPSHOT</version>
   <artifactId>poms-thesaurus</artifactId>
 
   <description>Thesaurus</description>
