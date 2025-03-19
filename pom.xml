@@ -121,7 +121,7 @@
     </repository>
   </distributionManagement>
   <repositories>
-     <repository>
+    <repository>
       <id>vpro-ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
        <releases>
@@ -130,6 +130,10 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
+    </repository>
+    <repository>
+      <id>sonatype</id>
+      <url>https://oss.sonatype.org/service/local/repositories/releases/content</url>
     </repository>
   </repositories>
 </project>
