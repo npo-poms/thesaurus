@@ -13,15 +13,16 @@
   <jsp:directive.page import="nl.vpro.configuration.spring.PropertiesUtil"/>
   <jsp:directive.page import="java.time.Instant"/>
   <jsp:directive.page import="java.time.Duration"/>
+  <jsp:directive.page import="java.util.stream.Collectors"/>
   <jsp:scriptlet>
     //We didn't set up MVC or so.
-    // We only need very simply access to properties, and to jws-calculation.
+    // We only need very simple access to properties, and to jws-calculation.
     PropertiesUtil propertiesUtil = ((PropertiesUtil) org.springframework.web.context.ContextLoader.getCurrentWebApplicationContext().getBean("properties"));
     request.setAttribute("properties", propertiesUtil.getMap());
     Instant expiration = Instant.now().plus(Duration.ofHours(1));
     request.setAttribute("jwtExpiration", expiration.toEpochMilli());
     request.setAttribute("jwt", Utils.jws("Example", expiration));
-    request.setAttribute("gtaaSchemes", Arrays.asList(Scheme.values()));
+    request.setAttribute("gtaaSchemes", Arrays.stream(Scheme.values()).filter(Scheme::display).collect(Collectors.toUnmodifiableList()));
   </jsp:scriptlet>
   <html lang="nl">
   <head>
