@@ -74,3 +74,8 @@ Known open source implementation of these are
 - ..
 
 And the idea was always that these could be completely analogically be extended to support the thesaurus too.
+
+
+== Architecture
+
+This popup works together with a few NPO api's. How it works exactly can be read link:https://github.com/npo-poms/poms-shared/tree/main/gtaa-openskos[here]
