@@ -11,12 +11,24 @@ image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-thesaurus.svg?lab
 
 source code of the thesaurus frontend deployed in the NPO API.
 
-This is deployed https://rs.poms.omroep.nl/v1/thesaurus/example[here]
+This is deployed on link:https://rs.poms.omroep.nl/[rs.poms.omroep.nl] where it also has an link:https://rs.poms.omroep.nl/v1/thesaurus/example[example page]. This example page can be used to see how it works, and how it can be implemented.
+But it boils down to:
+[source,html]
+----
+  <script src="https://rs.poms.omroep.nl/v1/thesaurus/popup.js"></script>
+
+  <script>
+ gtaa.open(
+     function (data) {
+        // do stuff
+     }, options
+ );
+
+</script>
 
 == NPO API authentication
 
-
-This is used as follows
+This also contains an implementation of the infamous NPO authentication. This can also be used separatedly as follows
 
 In your `<head>`
 
