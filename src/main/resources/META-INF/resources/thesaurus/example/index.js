@@ -14,8 +14,10 @@
          readonly.prop("checked", true);
          readonly.prop("readonly", "readonly");
          readonly.prop("disabled", "disabled");
+        $("#logoutlink").hide();
      } else {
          $("#loginlink").hide();
+
      }
 
      function showPerson() {
@@ -35,12 +37,12 @@
              role: role.val(),
              iframe: iframe
          };
-         var schemesVal = schemes.val();
+         const schemesVal = schemes.val();
          if (schemesVal.length > 0) {
              options.schemes = schemesVal;
          }
 
-         var ro = readonly[0].checked;
+         const ro = readonly[0].checked;
          if (! ro) {
              options.jwt = jwt;
              options.jwtExpiraton = $("meta[name=jwtExpiration]").attr("content");
