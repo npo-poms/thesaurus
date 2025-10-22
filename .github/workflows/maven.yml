@@ -6,6 +6,10 @@ on:
     branches: [ main, "REL-*"]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
 
@@ -20,16 +24,16 @@ jobs:
         distribution: 'temurin'
         java-version: 21
         server-id: vpro-ossrh
-        server-username: SONATYPE_USERNAME
-        server-password: SONATYPE_PASSWORD
+        server-username: CENTRAL_USERNAME
+        server-password: CENTRAL_PASSWORD
         gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
         gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
         cache: maven
     - name: Build with Maven
       run: mvn -B -Pdeploy,ossrh -U deploy
       env:
-        SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-        SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+        CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
         GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
 
 

@@ -100,6 +100,12 @@
             <a
               href="${pageContext.request.contextPath}/thesaurus/example/secure">log nu in</a>
           </p>
+
+          <p id="logoutlink">
+            Je bent ingelogd..
+            <a
+              href="${pageContext.request.contextPath}/logout">log nu uit</a>
+          </p>
         </div>
       </div>
       <div class="fields row">
