@@ -25,6 +25,7 @@ But it boils down to:
  );
 
 </script>
+----
 
 == NPO API authentication
 
