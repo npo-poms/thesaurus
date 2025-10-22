@@ -49,3 +49,12 @@ And then in javascript:
     }).then(function (response) {
  ...
 ----
+
+
+== Implementations
+
+Known open source implementation of this
+
+- link:https://github.com/vpro/magnolia-vpro-ui?tab=readme-ov-file#poms-extensions[Magnolia] (used to be) in use @VPRO
+- link:https://github.com/npo-poms/directus-cmsselector[directus] just a POC
+- ..
