@@ -21,7 +21,6 @@ jobs:
         server-password: CENTRAL_PASSWORD
         gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
         cache: maven
-
     - uses: oleksiyrudenko/gha-git-credentials@v2.1.2
       with:
         global: true
@@ -29,7 +28,7 @@ jobs:
         email: 'poms@mmprogrami.nl'
         token: '${{ secrets.GITHUB_TOKEN  }}'
     - name: Release
-      run: mvn -Pdeploy,ossrh --batch-mode  -Darguments=-DskipTests  release:prepare release:perform
+      run: mvn -Pdeploy,central --batch-mode  -Darguments=-DskipTests  release:prepare release:perform
       env:
         CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
         CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
