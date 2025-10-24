@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-<!--suppress MavenDuplicateDependenciesInspection -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -14,13 +13,51 @@
 
   <description>Thesaurus</description>
 
-
+  <properties>
+    <media.gui.version>6.17-SNAPSHOT</media.gui.version> <!-- the version of the war overlay   -->
+    <media.gui.package.version>6.17.0</media.gui.package.version> <!-- the version of poms-<version>.css in it, don't rename/remove this property, it is recognized by thesaurus popup  -->
+  </properties>
   <scm>
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <url>https://github.com/npo-poms/thesaurus</url>
     <tag>HEAD</tag>
   </scm>
+
+  <build>
+    <plugins>
+       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <!--
+          we need the poms css for the thesaurus popup
+          TODO: This needs to be in the thesaurus popup itself. (figure out a way to do that)
+          -->
+          <execution>
+            <id>unpack</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>nl.vpro.media</groupId>
+                  <artifactId>media-gui</artifactId>
+                  <version>${media.gui.version}</version>
+                  <type>war</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
+                  <includes>css/**,js/vendor*,resources/,head.jspx</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
@@ -69,6 +106,10 @@
       <artifactId>jakarta.servlet.jsp.jstl</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>poms-shared</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
@@ -88,7 +129,6 @@
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <repositories>
@@ -102,10 +142,6 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-    </repository>
-    <repository>
-      <id>sonatype</id>
-      <url>https://oss.sonatype.org/service/local/repositories/releases/content</url>
     </repository>
   </repositories>
 </project>
