@@ -21,10 +21,10 @@
 
 	<npo:favicon />
 
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-				integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-				crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<jsp:include page="/css/head.jspx" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <jsp:include page="/css/head.jspx" />
+
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/poms-${requestScope.properties['media.gui.package.version']}.css"/>
   <link rel="stylesheet" href="./popup.css"/>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
