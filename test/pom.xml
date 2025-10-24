@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!--suppress MavenDuplicateDependenciesInspection -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.vpro.poms</groupId>
+    <artifactId>poms-parent</artifactId>
+    <version>8.10.3</version>
+  </parent>
+
+  <name>poms thesaurus</name>
+  <version>8.7-SNAPSHOT</version>
+  <artifactId>poms-thesaurus-test</artifactId>
+  <description>Thesaurus</description>
+  <packaging>war</packaging>
+
+  <scm>
+    <connection>scm:git:${project.scm.url}</connection>
+    <developerConnection>scm:git:${project.scm.url}</developerConnection>
+    <url>https://github.com/npo-poms/thesaurus</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>poms-thesaurus</artifactId>
+      <version>8.7-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>jetty:run</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <configuration>
+          <stopKey>foo</stopKey>
+          <httpConnector>
+            <port>8070</port>
+          </httpConnector>
+          <webApp>
+            <contextPath>/v1</contextPath>
+          </webApp>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+</project>

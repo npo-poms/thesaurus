@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<web-app
+  xmlns="https://jakarta.ee/xml/ns/jakartaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                      https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+  version="5.0">
+
+  <display-name>API V1 Server</display-name>
+  <description>Hosts media and pages API's</description>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <filter>
+    <filter-name>mdc</filter-name>
+    <filter-class>nl.vpro.logging.filter.MDCFilter</filter-class>
+    <init-param>
+      <param-name>clear</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>mdc</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.jspx</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <absolute-ordering>
+    <name>svgobjects</name>
+    <name>poms_thesaurus</name>
+    <name>monitoring_endpoints</name>
+  </absolute-ordering>
+</web-app>

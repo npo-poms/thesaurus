@@ -1,7 +1,7 @@
 = thesaurus
 :toc:
 
- 
+
 image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-thesaurus.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:nl.vpro.poms%20AND%20a:poms-thesaurus]
 image:https://github.com/npo-poms/thesaurus/actions/workflows/maven.yml/badge.svg[link=https://github.com/npo-poms/thesaurus/actions/workflows/maven.yml]
 
@@ -80,3 +80,20 @@ And the idea was always that these could be completely analogically be extended 
 == Architecture
 
 This popup works together with a few NPO api's. How it works exactly can be read link:https://github.com/npo-poms/poms-shared/tree/main/gtaa-openskos[here]
+
+
+== Running locally
+
+The thesaurus frontend is served out via https://rs.poms.omroep.nl/v1 For testing purposes it can also be ran locally:
+
+[source, bash]
+----
+docker run -it  -v .:/root  -v $HOME/.m2:/root/.m2  -w /root/test  -p 8070 maven mvn
+----
+
+or of course without docker if you have maven and all installed:
+[source, bash]
+---
+cd test
+mvn
+---
