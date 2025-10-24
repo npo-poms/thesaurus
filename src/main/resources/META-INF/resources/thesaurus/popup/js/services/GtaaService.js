@@ -1,5 +1,7 @@
 gtaaApp.service('GtaaService', function($q, $http,  $location) {
 
+    this.thesaurusApi = document.querySelector("meta[name=thesaurusBaseUrl]").getAttribute("content"),
+
     document.querySelector('#searchValue').focus();
     this.submitConcept = function(concept, secret) {
         const deferred = $q.defer();
@@ -61,7 +63,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         const suggestionHeaders = {
             "x-origin": document.location.origin
         };
-        const path = "thesaurus/concepts/";
+        const path = "/concepts/";
         if (typeof (npoAuthentication) !== 'undefined') {
             npoAuthentication.addAuthorizationHeader(suggestionHeaders, path, params, true);
         }
@@ -95,7 +97,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
         }
 
         timeout = setTimeout(function() {
-            $http.get('/v1/api/' + path, {
+            $http.get(this.thesaurusApi + path, {
                 params: params,
                 headers: suggestionHeaders
             }).then(function (response) {
@@ -114,7 +116,7 @@ gtaaApp.service('GtaaService', function($q, $http,  $location) {
     };
 
     this.getStatus = function(id) {
-        return $http.get('/v1/api/thesaurus/concepts/status', {
+        return $http.get(this.thesaurusApi + '/concepts/status', {
             params: {
                 id: id
             }

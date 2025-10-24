@@ -65,6 +65,7 @@
   </c:choose>
   <meta name="personUpdateService"  content="${requestScope.properties['npo-pages_publisher.baseUrl']}/api/thesaurus/person"/>
   <meta name="conceptUpdateService" content="${requestScope.properties['npo-pages_publisher.baseUrl']}/api/thesaurus/concept"/>
+  <meta name="thesaurusBaseUrl" content="${requestScope.properties['thesaurus.baseUrl']}"/>
   <c:if test="${not empty param.apiKey}">
     <%-- This is not actually needed, for now the is no security on the /thesaurus end points --%>
     <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
