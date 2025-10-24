@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat 11 " type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11 " ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="21" nameIsGenerated="true">
-    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8070" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8070/v1" />
     <option name="UPDATING_POLICY" value="restart-server" />
     <deployment>
       <artifact name="poms-thesaurus-test:war exploded">
@@ -11,6 +11,7 @@
     </deployment>
     <server-settings>
       <option name="BASE_DIRECTORY_NAME" value="d8767228-6f58-4df0-b540-89c364eaf79b" />
+      <option name="HTTP_PORT" value="8070" />
     </server-settings>
     <predefined_log_file enabled="true" id="Tomcat" />
     <predefined_log_file enabled="true" id="Tomcat Catalina" />

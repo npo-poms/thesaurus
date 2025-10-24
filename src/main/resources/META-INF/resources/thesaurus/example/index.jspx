@@ -45,6 +45,7 @@
     <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
     <meta name="contextPath" content="${pageContext.request.contextPath}"/>
     <meta name="thesaurusBaseUrl" content="${requestScope.properties['thesaurus.baseUrl']}"/>
+    <meta name="thesaurusBaseUpdateUrl"  content="${requestScope.properties['npo-pages_publisher.baseUrl']}/api/thesaurus"/>
 
   </head>
   <body>
@@ -172,6 +173,13 @@
     <p>De implementatie van deze pagina vind je <a
         href="https://github.com/npo-poms/thesaurus/tree/main/src/main/resources/META-INF/resources/thesaurus/example">hier</a>
     </p>
+    <dl>
+      <dt>url voor zoeken</dt>
+      <dd id="searchUrl">${requestScope.properties['thesaurus.baseUrl']}</dd>
+      <dt>url voor indienen</dt>
+      <dd id="submitUrl">${requestScope.properties['npo-pages_publisher.baseUrl']}/api/thesaurus</dd>
+    </dl>
+
   </div>
   <div id="modal" class="modal">
     <div class="modal-content">
