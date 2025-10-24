@@ -6,7 +6,7 @@
   <bean id="properties" class="nl.vpro.configuration.spring.PropertiesUtil">
     <property name="locations" value="classpath:poms-urls.properties,classpath:test.properties" />
     <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    <property name="systemPropertiesMode" value="0" />
   </bean>
-
   <bean class="nl.vpro.thesaurus.Utils" />
 </beans>

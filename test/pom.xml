@@ -8,7 +8,7 @@
     <version>8.10.3</version>
   </parent>
 
-  <name>poms thesaurus</name>
+  <name>poms thesaurus test war</name>
   <version>8.7-SNAPSHOT</version>
   <artifactId>poms-thesaurus-test</artifactId>
   <description>Thesaurus</description>
@@ -28,6 +28,9 @@
       <version>8.7-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  <properties>
+    <maven.release.version>21</maven.release.version>
+  </properties>
 
   <build>
     <defaultGoal>jetty:run</defaultGoal>
