@@ -44,6 +44,9 @@
     <meta name="jwt" content="${requestScope.jwt}"/>
     <meta name="jwtExpiraton" content="${requestScope.jwtExpiration}"/>
     <meta name="contextPath" content="${pageContext.request.contextPath}"/>
+
+    <meta name="thesaurusBaseUrl" content="${requestScope.properties['thesaurus.baseUrl']}"/>
+
   </head>
   <body>
   <div class="poms-form form-fields col-8">
