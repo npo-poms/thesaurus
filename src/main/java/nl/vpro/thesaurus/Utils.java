@@ -55,7 +55,7 @@ public class Utils implements ApplicationContextAware {
         if (properties == null) {
             throw new RuntimeException("No properties found on application context");
         }
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication()).map(o -> o.getPrincipal()).orElse(null);
          if (principal instanceof Principal springPrincipal) {
              String authentication = springPrincipal.getName();
              String issuer = properties.getMap().get("gtaa.example.issuer");
@@ -67,8 +67,7 @@ public class Utils implements ApplicationContextAware {
             log.debug("Issuer {}", issuer);
             return jws(subject, authentication, issuer, expiration);
         } else {
-            String authentication = principal.toString();
-            log.debug("No valid authentication found {}", authentication);
+            log.debug("No valid authentication found {}", principal);
             return "";
         }
     }
