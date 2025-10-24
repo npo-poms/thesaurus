@@ -3,6 +3,7 @@
 
  
 image:https://img.shields.io/maven-central/v/nl.vpro.poms/poms-thesaurus.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:nl.vpro.poms%20AND%20a:poms-thesaurus]
+image:https://github.com/npo-poms/thesaurus/actions/workflows/maven.yml/badge.svg[link=https://github.com/npo-poms/thesaurus/actions/workflows/maven.yml]
 
 
 == Thesaurus popup
